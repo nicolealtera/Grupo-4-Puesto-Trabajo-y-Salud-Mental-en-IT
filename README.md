@@ -1,2 +1,2 @@
-# Grupo-4-Puesto-Trabajo-y-Salud-Mental-en-IT
-Análisis del puesto de trabajo y su relación con la salud mental en empresas tecnológicas.
+# Puesto de Trabajo y su Relación con la Salud Mental en el Ámbito Tecnológico: Un Análisis Estadístico del Impacto en el Desarrollo Profesional
+Este proyecto analiza si el puesto de trabajo dentro de una empresa tecnológica se relaciona con la edad de los encuestados y con su experiencia de impacto en el desarrollo profesional a causa de su salud mental, mediante ANOVA de dos factores y Análisis de Correspondencia.
