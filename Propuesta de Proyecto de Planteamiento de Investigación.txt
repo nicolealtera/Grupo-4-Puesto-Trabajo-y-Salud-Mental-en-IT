@@ -1,0 +1,66 @@
+PROPUESTA DE PLANTEAMIENTO DE INVESTIGACIÓN
+
+ El trabajo  en el derecho patrio, de acuerdo a HELPGUIDE.ORG INTERNATIONAL (2026), además de brindarnos beneficios económicos y proporcionarnos sentido, estructura y propósito en la vida al brindarnos un sentido de identidad, nos ayuda a fortalecer la autoestima, al tiempo que nos ofrece una importante conexión social. Sin embargo, tambien en contrapartida puede conllevar a riesgos ocupacionales que inciden negativamente en nuestra salud y vida, ya que no es una actividad socioeconomica productica exenta de dificultades para las personas de diferentes edades que en ejercicio de su deber y derecho al hecho social del trabajo, en ella se ocupan para generar ingresos y bienestar propios y el de su respectivo grupo familiar, conforme a disposiciones legales habidas en la Constitución de la República Bolivariana de Venezuela y La Ley Orgánica del Trabajo, Trabajadores y Trabajadoras.
+Bueno (2020), en relación con las enfermedades mentales en el sector de las tecnologías de la información-en lo sucesivo enfermendades mentales en el área de las it-, nos señala a titulo ilustrativo que si bien el teletrabajo puede evitar o reducir algunos riesgos laborales tradicionales, por ejemplo accidentes in itinere o de trayecto (artículo 69, numeral 3 de la Ley Orgánica de Prevención y Medio Ambiente de Trabajo (LOPCYMAT), ello no niega que pueda asimismo significar un aumento significativo de las enfermedades mentales a consecuencia “de factores de riesgo psicosocial como las altas cargas y ritmos de trabajo, las largas jornadas laborales, la percepción de tener que estar disponible en todo momento y en todo lugar, la falta de desarrollo profesional, la excesiva fragmentación de las tareas, la escasa autonomía y control sobre las tareas, una pobre cultura organizativa y conductas de ciberacoso”, entre otros, pueden perjudicar “la salud mental de los teletrabajadores, causando enfermedades profesionales como el agotamiento físico y mental (burnout), el estrés relacionado con el trabajo y la depresión”. 
+
+Por lo que así entonces, debemos tener en cuenta que entre los hechos laborales más comunes que perjudican nuestra salud mental se encuentran los siguientes:
+
+•	Jornadas largas e inflexibles, falta de personal debido a recortes o vacantes sin cubrir, o una carga de trabajo cada vez mayor.
+•	Trabajar a distancia sin una separación clara entre el trabajo y el tiempo personal.
+•	Un lugar de trabajo tóxico que fomenta el acoso, el hostigamiento o el abuso.
+•	Falta de entrenamiento u orientación para la función que se espera que desempeñe.
+•	Comunicación limitada o poco clara por parte de la gerencia sobre las tareas, los objetivos o la toma de decisiones.
+•	Falta de apoyo, escasez de equipo u otros recursos laborales, o prácticas de trabajo inseguras.
+
+En consecuencia, como bien señala Galindo Hernández (2022), nos encontramos con un fenómeno que  sin obviar que “El problema de salud mental ha existido desde que existe el ser humano”, ahora nos muestra como “con el paso del tiempo y con el avance de la tecnología se han identificado ciertos patrones que tienen las personas más propensas a sufrir de este padecimiento.”
+
+Por ello, encontramos que diferentes organizaciones abordan esta problematica. Por ejemplo la Open Sourcing Mental Health (OSMI) (Mental Health in Tech Survey) durante el periodo 2014-2019.Quien es responsable de una base de datos que se encuentra disponible en Kaggel, donse se recopiló información sobre las actitudes, percepciones de estigma y condiciones de salud mental de miles de profesionales de la industria tecnológica. 
+
+INTERROGANTE(S)
+
+En virtud de lo arriba expuesto, encontramos que la base de datos nos proporciona una muestra representativa que nos permite evaluar estadisticamente si la edad de los trabajadores difiere significativamente según la categoría de su puesto de trabajo y su percepción de perjuicio en la carrera profesional. Es decir, tenemos tener no sólo que se trata de un fenómeno de estudio en voga por el auge de nuevas actividades económicas disruptivas que aprovechan el crecimiento exponencial ha tenido el sector en los últimos tiempos, sino que también es un hecho que de acuerdo a los datos disponibles se puede medir para analizar en función de la edad de los trabajadores del sector tecnológico, según sus diferentes roles laborales aunado a la percepción de si la salud mental ha perjudicado su carrera o crecimiento profesional, por lo que así entonces tenemos la(s) siguiente(s) interrogante(s): ¿En qué medida la edad de los trabajadores del sector tecnológico varía según la categoría del puesto de trabajo ocupado y la percepción de impacto negativo de la salud mental en su carrera profesional?
+
+OBJETIVOS
+
+Objetivo General
+
+Evaluar las diferencias en la edad de los trabajadores del sector tecnológico en función de la categoría del puesto de trabajo desempeñatorio y la percepción del perjuicio en la carrera a causa de la salud mental.
+
+Objetivos Específicos
+
+Determinar el efecto de la categoría del puesto laboral sobre la edad de los encuestados 
+
+Analizar la variación de la edad según la presencia o ausencia de perjuicio percibido en el desarrollo profesional por motivos de salud mental 
+
+Identificar la existencia de un efecto de interacción entre el puesto de trabajo y la percepción de perjuicio en la carrera sobre la edad del trabajador 
+
+IMPORTANCIA
+
+La investigación de acuerdo a los resultados obtenidos servira para realizar una serie de recomendaciones entre nuestros compañeros de estudio y los estudiantes de la Escuela de Estadistica y Ciencias Actuariales de la Facultad de Ciencias Económicas y Sociales de la Universidad Central de Venezuela, entre otros, para favorecer el cuidado de la salud mental, muy especialmente entre aquellos que laboren en el sector de la tecnologia. .
+
+JUSTIFICACIÓN
+Además de demostrar la utilidad de la computación en la investigación estadistica, se trata de un tema de vigencia y utilidad.
+
+TÉCNICAS Y MÉTODOS ESTADÍSTICOS
+
+ANOVA Factorial de Dos vías
+Numiqo Team (2026) señala que 2El análisis de varianza de dos vías (o de dos factores) comprueba si hay diferencias entre más de dos muestras independientes divididas en dos variables o factores.” Es decir, características o campor de estudio y que para el caso de la investigación son: 
+Puesto de Trabajo (categoría multinomial).
+Perjuicio en la Carrera (categoría binaria: Sí/No).
+Para probar:
+Si el tipo de puesto laboral influye directamente en la Edad promedio del trabajador. Si percibir un perjuicio en la carrera por salud mental influye en la Edad promedio.
+Si el efecto de percibir un perjuicio sobre la Edad cambia o depende según la categoría del puesto que ocupa la persona.
+
+REFERENCIAS
+
+Bueno, C.(2020). Teletrabajo y salud mental: Avances y desafíos más allá de la pandemia. https://www.ilo.org/es/resource/articulo/teletrabajo-y-salud-mental-avances-y-desafios-mas-alla-de-la-pandemia 
+Galindo Hernandez, D.P. (2022). Detección Temprana de Necesidad de Tratamiento de Salud Mental con el Aprendizaje Automático para Trabajadores del Sector de Tecnologías de Información. https://rei.iteso.mx/bitstreams/cd4f327a-4519-43e2-9e31-45674d75f6bc/download 
+HELPGUIDE.ORG INTERNATIONAL (2026). Salud mental en el lugar de trabajo.  https://www.helpguide.org/es/ansiedad/salud-mental-en-el-lugar-de-trabajo 
+Jimenez, O (2023).Salud mental de la generación Z: el impacto de la tecnología y las redes sociales
+ https://www.eldigital.media/texto-diario/mostrar/4450711/salud-mental-generacion-z-impacto-tecnologia-redes-sociales 
+Kaggel. Mental Health in Tech - OSMI - 2014 - 2019
+La mente es Maravillosa (2026) ¿Cómo impactan los problemas de salud mental en la esfera laboral? https://lamenteesmaravillosa.com/como-impactan-los-problemas-de-salud-mental-en-la-esfera-laboral/  
+Leggett, T (2026). "Buscamos personas adictas a su trabajo": por qué algunas tecnológicas están imponiendo la jornada de 72 horas semanales https://www.bbc.com/mundo/articles/c5yk3115qpno 
+Numiqo Team (2026). ANOVA de dos vías. https://numiqo.es/tutorial/two-factorial-anova-without-repeated-measures 
+SMART Bienestar (2024). ¿Cuáles son los riesgos para la Salud Mental que enfrentan quienes trabajan en el Sector Tecnológico? https://es.linkedin.com/pulse/cu%C3%A1les-son-los-riesgos-para-la-salud-mental-que-enfrentan-teukf 
+
