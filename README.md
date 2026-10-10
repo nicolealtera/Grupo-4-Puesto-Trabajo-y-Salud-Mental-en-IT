@@ -47,9 +47,11 @@ En proceso
 
 ```
 ├── app.py                    # Código principal de la App de Streamlit
-├── requirements.txt          # Librerias de Python.
-├── README.md.                # Documentación del repositorio.
-│
+├── requirements.txt          # Librerias de Python
+├── README.md.                # Documentación del repositorio
+├── .streamlit
+│   └──config.toml            # Tema visual de la app
+│ 
 ├── pages/
 │   ├── 01_Inicio.py                # Página de inicio
 │   ├── 02_Marco_Metodologico.py    # Operacionalización y metodología
@@ -63,7 +65,6 @@ En proceso
 - **Nicole Altera**
 - **Danmara Dos Ramos**
 - **Arianna Oliveros**
-- **Mayerlin Otamendi**
 - **Camila Santiago**
 - **Sebastian Soto**
 
