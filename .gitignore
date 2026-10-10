@@ -1,0 +1,13 @@
+#ignora los entornos virtuales
+venv/
+env/
+.venv/
+#ignorar base de datos
+*.db
+*.sqlite3
+# Python
+__pycache__/
+#ignora los archivos de entorno
+.env
+*.env
+!.env.ejemplo
