@@ -1,0 +1,153 @@
+table Respuestas_otras {
+  usuarioID int [not null]
+  encuestaID int [not null]
+  categoria_laboralID int [not null]
+  estado_mentalID int [not null] 
+  ayuda_laboralID int [not null]
+  perjuicio_laboralID int [unique]
+  impacto_laboralID int [unique, not null]
+
+  score_percepcion_perjuicio float
+  otras_respuestas text
+  
+
+  indexes {(usuarioID,encuestaID) [pk]}
+}
+
+table diccionario_preguntas {
+  preguntasID int [pk]
+  preguntastexto text [not null]
+}
+
+table usuario {
+  usuarioID int [pk]
+  generoID int [not null]
+  paisID int [not null]
+  razaID int [not null]
+  estadoID int
+  edad int
+}
+
+table encuesta {
+  encuestaID int [pk]
+  encuestatexto text [not null]
+}
+
+table genero {
+  generoID int [pk]
+  generotexto text [not null]
+}
+
+table pais {
+  paisID int [pk]
+  paistexto text [not null]
+}
+
+table estado_EEUU {
+  estadoID int [pk]
+  estadotexto text [not null]
+  paisID int [not null]
+}
+
+table puesto_trabajo {
+  puesto_trabajoID int [pk]
+  puestotexto text [not null]
+}
+
+table condicion_trastorno {
+  condicion_trastornoID int [pk]
+  condicion_trastornotexto text [not null,unique]
+}
+
+table estado_mental {
+  estado_mentalID int [pk]
+  tiene_condicion_trastorno text
+  condicion_trastorno_ID int
+  seguro_medico text
+  tratamiento_mental text
+}
+
+
+table categoria_laboral {
+  categoria_laboralID int [pk]
+  puesto_trabajoID int [not null]
+
+grupo_edad varvhar
+nivel_jerarquico varchar
+
+  trabajo_remoto text
+  paisID int [not null]
+  independiente_trabajo text
+  rol_trabajo_estech text
+  primer_trabajo text 
+  compañia_estech text
+  estadoID int 
+}
+
+table ayuda_laboral_personas { 
+  ayuda_laboralID int [pk]
+  momento text [not null] 
+  recusos_empresa_ayudamental text
+  discucion_formal_saludmental text
+  conoce_opciones_ayuda text
+  beneficios_saludmental text
+  anonimato_protegido text
+}
+
+table perjuicio_salud_mental {
+  perjuicio_laboral int [pk]
+  importancia_salud_mental text
+  importancia_salud_fisica text
+  comodo_hablar text 
+  verian_mal text 
+  comentarios_malos text
+  consecuencias_negativas text
+}
+
+table impacto_profesional_estado_mental{
+  impactoID int [pk]
+  afecta_carrera text
+  como_afecta_carrera text
+  afecta_productividad text
+  porcentaje_afecta_productividad int
+  interfiere_trabajo text
+}
+
+table pregunta_encuesta {
+  preguntaID int [not null]
+  encuestaID int [not null]
+}
+
+Ref: "usuario"."usuarioID" < "Respuestas_otras"."usuarioID"
+
+Ref: "encuesta"."encuestaID" < "Respuestas_otras"."encuestaID"
+
+Ref: "genero"."generoID" < "usuario"."generoID"
+
+Ref: "puesto_trabajo"."puesto_trabajoID" < "categoria_laboral"."puesto_trabajoID"
+
+Ref: "pais"."paisID" <? "categoria_laboral"."paisID"
+
+Ref: "pais"."paisID" <? "usuario"."paisID"
+
+Ref: "categoria_laboral"."categoria_laboralID" < "Respuestas_otras"."categoria_laboralID"
+
+Ref: "pais"."paisID" <? "estado_EEUU"."paisID"
+
+Ref: "Respuestas_otras"."estado_mentalID" > "estado_mental"."estado_mentalID"
+
+Ref: "condicion_trastorno"."condicion_trastornoID" ?<? "estado_mental"."condicion_trastorno_ID"
+
+Ref: "estado_EEUU"."estadoID" ?<? "usuario"."estadoID"
+
+Ref: "ayuda_laboral_personas"."ayuda_laboralID" < "Respuestas_otras"."ayuda_laboralID"
+
+Ref: "estado_EEUU"."estadoID" ?<? "categoria_laboral"."estadoID"
+
+Ref: "diccionario_preguntas"."preguntasID" < "pregunta_encuesta"."preguntaID"
+
+Ref: "encuesta"."encuestaID" < "pregunta_encuesta"."encuestaID"
+
+Ref: "perjuicio_salud_mental"."perjuicio_laboral" ?- "Respuestas_otras"."perjuicio_laboralID"
+
+Ref: "impacto_profesional_estado_mental"."impactoID" - "Respuestas_otras"."impacto_laboralID"
