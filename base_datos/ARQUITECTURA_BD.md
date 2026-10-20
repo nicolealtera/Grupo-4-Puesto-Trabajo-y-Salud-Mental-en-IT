@@ -3,104 +3,97 @@
 ## 1. METODOLOGÍA
 
 ### 1.1 ESTADÍSTICA
-La base de datos Salud mental en la industria tecnológica de Open Sourcing Mental Illness (OSMI) (osmihelp.org), disponible en Kaggle, recoge datos entre los años 2014 al 2019, a excepción del año 2015, distribuidos de la siguiente manera:
-- **2014:** 1.259 filas (encuestados) y 27 columnas (variables).
-- **2016:** 1.433 filas (encuestados) y 63 columnas (variables).
-- **2017:** 756 filas (encuestados) y 122 columnas (variables).
-- **2018:** 417 filas (encuestados) y 123 columnas (variables).
-- **2018:** 352 filas (encuestados) y 82 columnas (variables).
-
-Para el logro de los objetivos desde el punto de vista del diseño experimental estadístico y siguiendo Martin (s/a) en referencia a Walter Federer (1973), tenemos que la investigación por su concepción de la estadística como ciencia, caracterización e inferencia, la investigación se tiene como un estudio observacional, transversal y correlacional de fuente secundaria. Así, se va a sintetizar descriptivamente una muestra de los encuestados para evaluar la distribución de las variables que será completado con un modelo inferencial basado en el ANOVA factorial de dos vías con interacción para contrastar el impacto simultáneo del nivel jerárquico y el grupo de edad sobre la percepción de perjuicio profesional; por lo que los hallazgos se circunscriben analíticamente a lo observado. A saber: Año 2014.
+Para el logro de los objetivos, y siguiendo a Martín (s/a) en referencia a Walter Federer (1973), se establece que la investigación corresponde a un estudio observacional, transversal y correlacional de fuente secundaria, correspondiente al periodo de años 2016-2019.
 
 ### 1.2 DE PROGRAMACIÓN
-Ahora bien, el diseño de la investigación por lo que corresponde a la programación, se basa en cuanto a arquitectura al enfoque Bottom-Up de Kimball “para el diseño de sistemas de almacenamiento y análisis de datos, basado en la construcción incremental de Data Marts dimensionales orientados a procesos de negocio específicos, los cuales posteriormente se integran para formar un Data Warehouse corporativo.” Específicamente, en el modelo dimensional simple de estrella en virtud de ser un “simple, intuitivo y de alto rendimiento para el análisis de datos.” (Ochoa y Triveno 2026)
+El diseño de la investigación en lo relativo a la programación se fundamenta, en cuanto a arquitectura, en el enfoque *Bottom-Up* de Kimball "para el diseño de sistemas de almacenamiento y análisis de datos, basado en la construcción incremental de Data Marts dimensionales orientados a procesos de negocio específicos, los cuales posteriormente se integran para formar un Data Warehouse corporativo". Específicamente, se adopta el modelo dimensional simple de estrella por ser "simple, intuitivo y de alto rendimiento para el análisis de datos" (Ochoa y Triveño, 2026).
 
-Por lo que se verificarán los siguientes pasos para cumplir ese modelo:
+Para la implementación de este modelo se verificarán los siguientes pasos:
 
-#### 1.2.1 Selección del Proceso Organizacional (Año 2014): 
-Para alcanzar el modelo estrella de Kimball se creará una Tabla de Hechos (`Fact_Percepcion_Salud_Mental`), seleccioándose las variables (preguntas) que de seguidas se indican: 
+#### 1.2.1 Selección del Proceso Organizacional
+Para alcanzar el modelo estrella de Kimball se estructurará la arquitectura en torno a la Tabla de Hechos (`FACT_HECHOS`), relacionando las siguientes variables y preguntas de investigación:
 
-##### 1.2.1.1 (Variable Dependiente: Variable respuesta):
-"Do you think that discussing a mental health issue with your employer would have negative consequences?" (¿Crees que hablar de un problema de salud mental con tu empleador tendría consecuencias negativas?).: `obs_consequence`. Valores: `Yes` (Si)/ `No` (No)/ `Maybe` (Quizas)
+* **1.2.1.1 (Variable Dependiente: Variable respuesta - Tabla de Hechos / Dimensión Percepción):**
+  * *"Do you think that discussing a mental health issue with your employer would have negative consequences?"* (¿Crees que hablar de un problema de salud mental con tu empleador tendría consecuencias negativas?): `obs_consequence`. 
+  * Valores: `Yes` (Sí) / `No` (No) / `Maybe` (Quizás).
 
-##### 1.2.1.2 (Variables Independientes Simples. Dimensión Persona) 
-- *“How old are you?”* (¿Qué edad tienes?): `Age` (Edad).
-- *“What is your gender?”* (¿Cuál es tu género?): `Gender` (Género). Se estandarizará en la limpieza de los datos.
-- *“What country do you live in?”* (¿En qué país vives?): `Country` (País).
-- *"Do you have a family history of mental illness?"* (¿Tienes antecedentes familiares de enfermedad mental?): `family_history` (historia familiar) Valores: `Yes` (Si), `No` (No)  
+* **1.2.1.2 (Variables Independientes Simples - Dimensión Persona / `DIM_PARTICIPANTE` y `DIM_UBICACION`):**
+  * *"How old are you?"* (¿Qué edad tienes?): `Age` (Edad).
+  * *"What is your gender?"* (¿Cuál es tu género?): `Gender` (Género). Se estandarizará durante la fase de limpieza de datos.
+  * *"What country do you live in?"* (¿En qué país vives?): `Country` (País / alojado en `DIM_UBICACION`).
+  * *"Do you have a family history of mental illness?"* (¿Tienes antecedentes familiares de enfermedad mental?): `family_history` (Antecedentes familiares). Valores: `Yes` (Sí), `No` (No).
 
-##### 1.2.1.3 (Variables Independientes Compuestas. Dimensión Organizacional)
-**Nivel Jerárquico del Puesto de Trabajo (`Nivel_Jerarquico`):**
-- *"Are you self-employed?"* (¿Trabaja independiente?): `self_employed`. Valores: `Yes`, `No`, `NA`.
-- *"Is your employer primarily a tech company/organization?"* (¿Es su empleador principalmente una empresa u organización tecnológica?). Valores: `Yes` (Si), `No` (No)  
-- *"How many employees does your company or organization have?"* (¿Cuántos empleados tiene su empresa u organización?): `no_employees`. Valores: Intervalos en `1-5`, `6-25`, `26-100`, `100-500`, `500-1000`, `More than` (más de) `1000`.
-- *"Would you be willing to discuss a mental health issue with your direct supervisor(s)?"* (¿Estaría dispuesto a hablar sobre un problema de salud mental con su(s) supervisor(es) directo(s)?): `supervisor`. Valores: `Yes`, `No`, `Some of them`.
+* **1.2.1.3 (Variables Independientes Compuestas - Dimensión Organizacional / `DIM_TRABAJO`):**
+  * Nivel Jerárquico del Puesto de Trabajo (`Nivel_Jerarquico`).
+  * *"Are you self-employed?"* (¿Trabaja de forma independiente?): `self_employed`. Valores: `Yes`, `No`, `NA`.
+  * *"Is your employer primarily a tech company/organization?"* (¿Es su empleador principalmente una empresa u organización tecnológica?): `tech_company`. Valores: `Yes` (Sí), `No` (No).
+  * *"How many employees does your company or organization have?"* (¿Cuántos empleados tiene su empresa u organización?): `no_employees`. Valores: Intervalos `1-5`, `6-25`, `26-100`, `100-500`, `500-1000`, `More than 1000`.
+  * *"Would you be willing to discuss a mental health issue with your direct supervisor(s)?"* (¿Estaría dispuesto a hablar sobre un problema de salud mental con su(s) supervisor(es) directo(s)?): `supervisor`. Valores: `Yes`, `No`, `Some of them`.
 
-#### 1.2.2 Declaración de la Granularidad: 
-Una (1) fila por cada encuestado para el año 2014. La tabla de hechos (`Fact_Percepcion_Salud_Mental`) asentará para cada individuo la variable dependiente transformada que se vinculará mediante *Foreign Keys* (FK) a la Dimensión Persona (agrupación de las variables sociodemográficas y de control: `age`, `gender`, `country`, `family_history`) y a la Dimensión Organizacional (variables independientes compuestas: `Nivel_Jerarquico` del puesto de trabajo).
+#### 1.2.2 Declaración de la Granularidad
+Una (1) fila por cada respuesta registrada de un encuestado en cada edición anual (años 2016-2019). Así, la tabla de hechos (`FACT_HECHOS`) asentará la variable dependiente transformada, la cual se vinculará mediante Claves Foráneas (`Foreign Keys` - `FK`) a la **Dimensión Persona** (`DIM_PARTICIPANTE`: agrupación de variables sociodemográficas y de control: *age*, *gender*, *family_history*), a la **Dimensión Ubicación** (`DIM_UBICACION`: *country*), a la **Dimensión Organizacional** (`DIM_TRABAJO`: variables independientes compuestas y *Nivel_Jerarquico* del puesto de trabajo), así como a las dimensiones de **Tiempo** (`DIM_TIEMPO`) y **Percepción** (`DIM_PERCEPCION`).
 
-#### 1.2.3 Identificación de las dimensiones que se aplican a cada fila en la tabla de hechos: 
-- `id_persona_fk`: Conexión con el perfil demográfico, el rango de edad y los antecedentes del encuestado en la Dimensión Persona.
-- `id_organizacional_fk`: Conexión con las características de la empresa y el puesto ocupado en la Dimensión Organizacional.
+#### 1.2.3 Identificación de las dimensiones que se aplican a cada fila en la tabla de hechos:
+* **`participanteSK`:** Conexión con el perfil sociodemográfico, el rango de edad y los antecedentes del encuestado en la Dimensión Persona (`DIM_PARTICIPANTE`).
+* **`trabajoSK`:** Conexión con las características de la empresa, el tamaño organizacional y el puesto ocupado en la Dimensión Organizacional (`DIM_TRABAJO`).
+* **`encuestaSK`:** Conexión con la edición o año de la encuesta (2016-2019) en la Dimensión Tiempo (`DIM_TIEMPO`).
+* **`ubicacionSK`:** Conexión con la procedencia geográfica y el país de residencia en la Dimensión Ubicación (`DIM_UBICACION`).
+* **`percepcionSK`:** Conexión con las opiniones y el clima laboral sobre salud mental en la Dimensión Percepción (`DIM_PERCEPCION`).
 
-#### 1.2.4 Identificación de los hechos 
-(“Campos numéricos que completaran cada fila de la tabla de hechos. Que se está respondiendo. Métricas verdades al nivel de detalle seleccionado.” (Ochoa y Triveno, 2026). En consecuencia, los hechos serán transformación cuantitativa de la respuesta analítica evaluada como de seguidas se explica:
+#### 1.2.4 Identificación de los hechos
+"Campos numéricos que completarán cada fila de la tabla de hechos. Qué se está respondiendo. Métricas verdaderas al nivel de detalle seleccionado" (Ochoa y Triveño, 2026). En consecuencia, los hechos serán la transformación cuantitativa de la respuesta analítica evaluada, según se explica a continuación:
 
-##### 1.2.4.1 `obs_consequence_score`:
-- `0 = No` (No). Interpretación: No cree que hablar de un problema de salud mental con el empleador tendrá consecuencias negativas.
-- `1 = Maybe` (Quizás). Interpretación: Cree que quizás hablar de un problema de salud mental con el empleador tendrá consecuencias negativas.
-- `2 = Yes` (Si): Interpretación: Si cree que hablar de un problema de salud mental con el empleador tendrá consecuencias negativas.
-Es decir, el dato cualitativo se transformará en una escala continua de intervalo ordinal.
+* **1.2.4.1 `consecuencias_negativas`:**
+  * `0` = No. Interpretación: No cree que hablar de un problema de salud mental con el empleador tendrá consecuencias negativas.
+  * `1` = Maybe (Quizás). Interpretación: Cree que quizás hablar de un problema de salud mental con el empleador tendrá consecuencias negativas.
+  * `2` = Yes (Sí). Interpretación: Sí cree que hablar de un problema de salud mental con el empleador tendrá consecuencias negativas.
+  * *Es decir, el dato cualitativo se transformará en una escala de medida ordinal para el análisis inferencial mediante ANOVA factorial de dos vías.*
 
-##### 1.2.4.2 `Cantidad_encuestados`: 
-Suma de la constante que será igual a 1 para cada fila. (COUNT/SUM) para calcular la distribución descriptiva y el tamaño de la muestra ($n$) por cada celda dentro de la entidad según registro y atributo. Es decir, la celda es la medida que habita dentro de la entidad (Tabla de hechos (`Fact_Percepcion_Salud_Mental`)) según el registro (fila) y el atributo (columna) que viene dado por la granularidad.
+* **1.2.4.2 `Cantidad_encuestados`:**
+  * Suma de la constante igual a 1 para cada fila (`COUNT`/`SUM`) para calcular la distribución descriptiva y el tamaño de la muestra ($n$) por cada celda dentro de la entidad según registro y atributo. Es decir, la celda es la medida que habita dentro de la entidad (Tabla de hechos: `FACT_HECHOS`) según el registro (fila) y el atributo (columna) determinado por la granularidad.
 
 #### 1.2.5 Definición de los Factores y sus Niveles
 
-##### 1.2.5.1 Factor Edad. Niveles:
-- `E1`: Joven (Menos de 30 años)
-- `E2`: Adulto Intermedio (De 30 a 45 años) — El grupo mayoritario en el sector tecnológico.
-- `E3`: Adulto Sénior (Más de 45 años)
+* **1.2.5.1 Factor Edad. Niveles:**
+  * **E1:** Joven (Menos de 30 años)
+  * **E2:** Adulto Intermedio (De 30 a 45 años) — El grupo mayoritario en el sector tecnológico.
+  * **E3:** Adulto Sénior (Más de 45 años)
 
-##### 1.2.5.2 Factor Jerárquico. Niveles: 
-- `J1`: Operativo (Junior): encuestados en empresas grandes, no independientes, sin personal a cargo.
-- `J2`: Supervisor (Semi-senior): encuestados con funciones de coordinación/supervisión en empresas medianas con supervisores, estructuras corporativas medianas.
-- `J3`: Directivo / Independiente (encuestados independientes).
+* **1.2.5.2 Factor Jerárquico. Niveles:**
+  * **J1:** Operativo / Junior (Encuestados en empresas grandes, no independientes, sin personal a cargo).
+  * **J2:** Supervisor / Semi-Senior (Encuestados con funciones de coordinación o supervisión en estructuras corporativas medianas).
+  * **J3:** Directivo / Independiente (Encuestados independientes o con cargos directivos).
 
-##### 1.2.5.3 Matriz de Datos: 
-3x3 (Por elaborar)
+* **1.2.5.3 Matriz de Datos:** $2 \times 3$ (Por elaborar)
 
 ---
 
-## 2. BASE DE DATOS EN DBEAVER 
-`C:\Users\User\Desktop\mental_health.sqlite\mental_health.sqlite`
+## 2. BASE DE DATOS EN DBEAVER
+Ruta de conexión local: `C:\Users\User\Desktop\mental_health.sqlite\mental_health.sqlite`
 
 ---
 
 ## 3. TIPOS DE DATOS
 
-### 3.1 Numérico(s)
-- `3.1.1` `Age`: `Int`
-- `3.1.2` `mental_health_consequence`: `Int`
+### 3.1 Numéricos
+* **3.1.1** `Age`: `INT`
+* **3.1.2** `mental_health_consequence` (`consecuencias_negativas` en `FACT_HECHOS`): `INT`
 
 ### 3.2 Texto
-- `3.2.1` `Grupo_edad`: `Varchar`
-- `3.2.2` `Nivel_jerárquico`: `Varchar`
-- `3.2.3` `mental_health_consequence`: `Varchar`
-- `3.2.4` `Country`: `varchar`
-- `3.2.5` `Gender`: `Varchar`
+* **3.2.1** `Grupo_edad`: `VARCHAR`
+* **3.2.2** `Nivel_jerarquico`: `VARCHAR`
+* **3.2.3** `consecuencias_negativas_texto`: `VARCHAR`
+* **3.2.4** `Country`: `VARCHAR`
+* **3.2.5** `Gender`: `VARCHAR`
 
 ### 3.3 Fecha
-- `3.3.1` `Datetime`: `Datetime`
+* **3.3.1** `Datetime` / `encuestatexto`: `DATETIME` / `VARCHAR`
 
 ---
 
-## 4. LIBRERIAS E INSTALACIONES
+## 4. LIBRERÍAS E INSTALACIONES
 ```python
 import duckdb
 import pandas as pd
 import numpy as np
 import sqlite3
-
-## 5.	BLOQUES DE CÓDIGO: Por definir
-
