@@ -54,17 +54,17 @@ with st.sidebar:
 
 load_dotenv()
 
-@st.cache_resource(show_spinner="Conectando a MotherDuck...")
 def get_conn():
     try:
         token = st.secrets["MOTHERDUCK_TOKEN"]
     except (FileNotFoundError, KeyError):
         token = os.getenv("MOTHERDUCK_TOKEN") or os.getenv("motherduck_token")
 
+    # Usamos el nombre exacto con guiones bajos que vimos en la captura
     if token:
-        return duckdb.connect("md:puesto de trabajo y salud mental", config={"motherduck_token": token})
+        return duckdb.connect("md:puesto_trabajo_y_salud_mental", config={"motherduck_token": token})
     else:
-        return duckdb.connect("md:puesto de trabajo y salud mental")
+        return duckdb.connect("md:puesto_trabajo_y_salud_mental")
 
 try:
     st.session_state["conn"] = get_conn()

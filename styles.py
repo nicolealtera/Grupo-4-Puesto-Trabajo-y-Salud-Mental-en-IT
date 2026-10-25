@@ -88,3 +88,5 @@ button[data-baseweb="tab"][aria-selected="true"]{ background:#84B3CE; }
 
 def load_css():
     st.markdown(CSS, unsafe_allow_html=True)
+
+PALETA_GRAFICOS = ['#17597C', '#84B3CE', '#0E3F59', '#DDE5E0', '#F5EEDD']
