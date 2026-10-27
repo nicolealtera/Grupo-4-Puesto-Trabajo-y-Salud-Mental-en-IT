@@ -125,3 +125,46 @@ profesional como una forma de **recompensa negativa** (estima y oportunidades de
 promoción).
 """
     )
+st.markdown(
+   """ ## 2.3 Fundamentos técnicos del ANOVA 
+El Análisis de Varianza (ANOVA) es una herramienta estadística de modelado  lineal que permite calcular si los valores esperados, usualmente medias, de dos o más grupos o condiciones experimentales son estadísticamente iguales, es decir, define si existen algunas diferencias significativas entre ellos. El ANOVA estima la proporción de la variación observada que se atribuye al factor en estudio  y se compara con la variación no explicada o residual. Aunque este modelo de datos se suele aplicar más como prueba para tres o más grupos, es posible aplicarse a dos grupos.
+Como se menciono anteriormente, el ANOVA se utiliza normalmente para probar diferencias de las medias, y esto lo hace comparando dos estimaciones de variabilidad para asi contrastar las medias:
+Variación entre grupos: Refleja la variabilidad asociada a las diferencias entre las medias de cada grupo.
+Variación dentro de los grupos: Mide la dispersión entre las observaciones respecto a la media de su propio grupo.
+Cuando las medias poblacionales son iguales, los cuadrados medios entre grupos y dentro de los grupos deben estimar aproximadamente la misma varianza de error y por lo tanto producir un estadístico F cercano a 1. Opuesto a ello, si las medias de los grupos estan separadas en relación con la variabilidad que existe dentro de los grupos, la estimación entre grupos incrementa, lo que produce un estadístico F mayor,esto aporta evidencia solida para rechazar la hipótesis nula de medias iguales. 
+###Terminología esencial de ANOVA
+**Factor:** Variable explicativa categórica.
+**Nivel de factor:** Cada una de las categorías que componen un factor.
+**Variable de respuesta:** O variable dependiente, es la medida cuantitativa que se analiza o de la cual es objeto de analisis.
+**Efecto principal:** La asociación media entre un factor y la variable de respuesta, tras considerar los demás términos del modelo.
+**Efecto de interacción:** Ocurre cuando la relación entre un factor y la variable de respuesta depende del nivel que tome otro factor.
+**Residual:** Es la diferencia entre un valor observado y el valor predicho por el modelo lineal ajustado. Muchas suposiciones acerca del ANOVA se evalúan sobre la distribución de estos residuos, más que del resultado bruto considerado sin su estructura de grupos.
+**Prueba ómnibus:** Una prueba general es una prueba estadística que se utiliza para evaluar si existen diferencias significativas entre múltiples grupos o condiciones. Un resultado significativo detecta que existe al menos una diferencia entre las medias, pero no identifica cuáles difieren directamente.
+
+Existen diferentes variantes del modelo ANOVA según el estudio que se va a realizar, siendo las principales:
+**ANOVA Unidireccional:** Examina un único factor categórico y un resultado cuantitativo. Es el método estándar para comparar varias medias de grupo independientes bajo un modelo de varianza común.
+**ANOVA Bidireccional y Factorial:** Incorpora dos o mas factores de manera simultánea, este modelo puede ser mejor que realizar pruebas unidireccionales separadas porque puede revelar interacciones y estimar los efectos dentro de un modelo unificado. 
+**Otras variantes del ANOVA son:** el ANOVA de medidas repetidas, el ANOVA mixto o el ANOVA de Welch, entre otras variantes.
+
+###Supuestos del ANOVA
+Para que los resultados sean válidos, deben cumplirse los siguientes supuestos:
+
+**Independencia de observaciones:** Las mediciones deben ser independientes entre sí, a menos que el modelo seleccionado represente explícitamente datos repetidos, emparejados, agrupados o jerárquicos. La independencia está determinada por el diseño de la investigación y el proceso de recopilación de datos.
+
+**Normalidad de los residuos:** Los residuos del modelo deben seguir una distribución aproximadamente normal. Para la verificación formal de este supuesto se aplica la prueba de Shapiro-Wilk (1965):
+la prueba se basa en la covarianza entre los valores ordenados de la muestra y los valores esperados bajo la hipótesis de normalidad. De acuerdo con la Universidad Autónoma de Coahuila (s/a), se calcula a partir de los siguientes pasos:
+
+***Hipótesis nula (H0):*** los datos provienen de una población con distribución normal. 
+***Hipótesis alternativa (H1):*** los datos no provienen de una población con distribución normal. 
+
+No se debe usar esta prueba de normalidad como un pase directo ya que en las muestras pequeñas el contraste tiene poca potencia, y con muestras muy grandes es posible que detecte desviaciones que no tienen consecuencias prácticas para los contrastes paramétricos.
+
+
+**Homogeneidad de varianzas:** El ANOVA clásico asume que la varianza del error es constante e igual entre los grupos. Este supuesto se evalúa formalmente mediante la prueba de Levene, la cual contrasta si las varianzas poblacionales de los grupos son equivalentes:
+Se utiliza para comprobar si varios grupos tienen la misma varianza en la población. 
+***Hipótesis nula (H0):*** Los grupos tienen varianzas iguales.
+***Hipótesis alternativa (H1):*** Los grupos tienen varianzas diferentes.
+
+**Ausencia de observaciones altamente influyentes:** El ANOVA se basa en desviaciones al cuadrado, por lo que se tiene que comprobar que el modelo no este sesgado por valores extremos (outliers), ya que observaciones extremas pueden influir fuertemente en medias, suma de cuadrados y estadísticas F. Cualquier exclusión o análisis de sensibilidad debe documentarse de forma transparente.
+"""
+)
