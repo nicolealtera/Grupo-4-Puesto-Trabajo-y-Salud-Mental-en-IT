@@ -120,3 +120,48 @@ Esto se relaciona directamente con el estigma percibido y el miedo a la discrimi
 """)
 st.divider()
 
+st.header("3. Contexto histórico e internacional de la salud mental")
+st.write("A continuación, se presenta la evolución de los derechos laborales, los modelos de estrés y el reconocimiento de la salud mental en el ámbito organizacional.")
+
+st.write("")
+
+tab_1, tab_2, tab_3, tab_4 = st.tabs([
+    "1872 - 1948 ➔", 
+    "1979 - 1984 ➔", 
+    "1990 - 2006 ➔", 
+    "2014 - Hoy"
+])
+with tab_1:
+    with st.container(border=True):
+        st.write("""
+        La creación de la OMS es un hecho anterior a su constitución el 7 de abril de 1948. 
+        Los programas de seguridad social Von Bismarck sirven de precedente al sistema de bienestar social de Estados Unidos y como antecedente a la constitución 
+        de la Organización Internacional del Trabajo (OIT) en 1919, para reflejar que la justicia social es esencial para alcanzar la paz universal. Esto se complementa 
+        con el Informe de Massachusetts de 1872 y la Ley Williams-Steiger de Seguridad y Salud Ocupacional en 1970.
+        """)
+
+with tab_2:
+    with st.container(border=True):
+        st.write("""
+        Las agencias de la ONU actúan en colaboración en asuntos de interés común, como la salud mental en el trabajo. Para 1979 surge el Modelo Demandas-Control de Karasek, 
+        que describe las demandas psicológicas y el control, dando lugar a estados laborales como la alta tensión (alta demanda + bajo control), trabajo activo, baja tensión y trabajo pasivo. 
+        Este modelo se constituye como fundamento teórico de la OIT y la OMS durante 1984 para definir los factores psicosociales de las enfermedades ocupacionales.
+        """)
+
+with tab_3:
+    with st.container(border=True):
+        st.write("""
+        En paralelo, durante 1990 se aprueba la Ley de Estadounidenses con Discapacidades (ADA), asimilada posteriormente en la Convención sobre los Derechos de las Personas con Discapacidad (CRPD) de 2006. " 
+        Para 1996 surge el Modelo Esfuerzo-Recompensa de Siegrist, el cual diferencia dos tipos de esfuerzo: extrínseco (demandas del trabajo) e intrínseco (motivación y sobre-compromiso). Las recompensas que obtienen los trabajadores " 
+        pueden ser monetarias, respeto y apoyo, o seguridad en el puesto y promoción." 
+        """)
+
+with tab_4:
+    with st.container(border=True):
+        st.write("""Para el año 2014 se registra la iniciativa de la corporación sin fines de lucro Open Sourcing Mental Health (OSMI), creada por Ed Finkler, cuyas encuestas desde 2014 a 2019 sirvieron de base de datos bruta a esta investigación. 
+        Finalmente, la 11.ª revisión de la Clasificación Internacional de Enfermedades (CIE-11) define el agotamiento laboral como un fenómeno ocupacional. De tal manera que queda en evidencia que la salud mental no es una tendencia sino un tema 
+        de interés legítimo y de vanguardia.
+        """)
+
+
+
