@@ -163,5 +163,57 @@ with tab_4:
         de interés legítimo y de vanguardia.
         """)
 
+st.markdown("---")
+st.header("5. Definición de términos básicos")
+tab1, tab2, tab3, tab4 = st.tabs(["🧠 Salud y Prejuicio", "🚫 Estigma", "🏢 Jerarquía y Liderazgo", "💻 Edad y Sector"])
+
+with tab1:
+    st.markdown("### Salud mental")
+    st.write("Se define como el \"estado de bienestar mental que permite a las personas hacer frente a los momentos de estrés de la vida, desarrollar todas sus habilidades, " \
+    "aprender y trabajar adecuadamente e integrarse en su entorno\" Constituye un valor intrínseco y fundamental de las personas, " 
+    "formando parte esencial del bienestar general.")
+    
+    st.write("---")
+    
+    st.markdown("### Percepción de prejuicio profesional")
+    st.write("""
+    Se refiere a los estereotipos sociales sobre las enfermedades mentales que generan actitudes y comportamientos negativos, en ocasiones inconscientes.
+    Incluye el pesimismo terapéutico (la idea de que las personas con enfermedades mentales no pueden mejorar) y el estigma en el entorno laboral, que puede llevar a quienes experimentan 
+    dificultades de salud mental a guardar silencio (De Angelis, 2024).""")
+
+with tab2:
+    st.markdown("### Estigma")
+    st.write("Suele surgir de una falta de conocimiento o de miedo. En el ámbito de la salud mental, se identifican estos tipos de estigma:")
+    st.markdown("- **Estigma público:** Actitudes negativas o discriminatorias que otras personas tienen sobre la enfermedad mental.")
+    st.markdown("- **Autoestigma:** Actitudes negativas que tienen las personas sobre su propia enfermedad mental, incluyendo sentir vergüenza.")
+    st.markdown("- **Estigma institucional:** Es sistémico e implica políticas del gobierno y las organizaciones privadas que, de forma intencionada o no intencionada, limitan las oportunidades de las personas con una enfermedad mental. Entre algunos ejemplos se incluye la asignación de menos fondos para la investigación de la enfermedad mental o menos servicios de salud mental en relación con otro tipo de atención médica.")
+    st.markdown("- **Factores subyacentes:** Se incluyen el miedo/evitación, la malevolencia, el autoritarismo y la imprevisibilidad.")
+    st.write("El estigma suele surgir de una falta de conocimiento o de miedo, identificándose")
+
+with tab3:
+    st.markdown("### Jerarquía laboral")
+    st.write("""De acuerdo con la Escuela de Negocios de Madrid (Business School of Madrid), " \
+    es \"el sistema formal que establece el orden, la subordinación y las líneas de reporte entre los diferentes niveles de autoridad dentro de una organización. 
+    Su función principal es coordinar las actividades estratégicas, asegurando que cada profesional conozca su rol exacto, su posición jerárquica dentro del equipo y a quién debe rendir cuentas\". 
+    Adicionalmente, para efectos de la investigación la jerarquía se operacionaliza en tres niveles: Directivo, Coordinación y Operativo.""")
+    
+    st.write("---")
+    
+    st.markdown("### Confianza en el liderazgo")
+    st.write("""Se fundamenta en la premisa de que \"la confianza es el ingrediente más importante para construir un equipo\" (Covey). Esta confianza nace de dos dimensiones fundamentales: " \
+    el carácter y la competencia.""")
+
+with tab4:
+    st.markdown("### Edad")
+    st.write("Se refiere a la edad en años cumplidos, es decir, al número de aniversarios del nacimiento transcurridos hasta la fecha de referencia (la edad en el último cumpleaños).")
+    
+    st.write("---")
+    
+    st.markdown("### Sector tecnológico")
+    st.write("""Es el conjunto de actividades económicas y organizaciones dedicadas a la investigación, desarrollo, fabricación, comercialización y prestación de servicios relacionados con la tecnología. 
+    Abarca áreas como el desarrollo de software, la infraestructura de hardware, las telecomunicaciones, los servicios de TI (Tecnologías de la Información), la computación en la nube y el análisis de datos. 
+    Este sector se caracteriza por su rápido ritmo de innovación, la alta exigencia de actualización técnica, una cultura orientada a resultados y entornos de trabajo altamente competitivos.""")
+
+
 
 
