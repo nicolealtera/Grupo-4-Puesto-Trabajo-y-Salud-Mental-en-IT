@@ -15,3 +15,38 @@ Ahora bien, en este contexto el estigma da lugar a lo que la literatura denomina
 ● "Describir la distribución de la percepción de perjuicio profesional por nivel jerárquico y grupo de edad. 
 ● "Analizar la relación entre la edad y la percepción de perjuicio dentro de cada nivel jerárquico. 
 ● "Determinar si existen diferencias significativas en la percepción de perjuicio según el nivel jerárquico y el grupo de edad, y si existe interacción entre ambos factores. "
+
+t.subheader("Limitaciones del Estudio")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    with st.container(border=True):
+        st.markdown("### 🚨 1. Sesgo de autoselección y representatividad")
+        st.markdown("""La recolección de datos se basó en encuestas de participación voluntaria (2016-2019) sin un muestreo probabilístico. 
+        Esto genera un sesgo de autoselección, ya que es probable que la muestra sobrerrepresente a individuos con mayor interés o sensibilización hacia la salud mental. 
+        Además, la predominancia de participantes de Estados Unidos limita la generalización de los hallazgos al resto de los trabajadores del sector tecnológico a nivel global.""")
+
+with col2:
+    with st.container(border=True):
+        st.markdown("### 📂 2. Uso de datos secundarios")
+        st.markdown("""La investigación emplea la encuesta *OSMI Mental Health in Tech Survey*, diseñada por una organización externa.
+        Esto implica que el equipo investigador no tuvo control sobre el diseño del cuestionario, la redacción de las preguntas ni la disponibilidad de las variables (algunas, como el puesto de trabajo, solo se aplicaron en años específicos, como 2016). 
+        Asimismo, al tratarse de datos autorreportados, no es posible verificar la veracidad absoluta de las respuestas.""")
+
+col3, col4 = st.columns(2)
+
+with col3:
+    with st.container(border=True):
+        st.markdown("### ⏳ 3. Diseño transversal")
+        st.markdown("""Al tratarse de encuestas transversales, cada medición capta a los individuos en un único momento. " 
+        Dado que los participantes varían de un año a otro (no hay un seguimiento longitudinal de los mismos sujetos entre 2016 y 2019), no es posible analizar cambios individuales a lo largo del tiempo ni establecer relaciones de causalidad, 
+        limitando los resultados a la identificación de asociaciones estadísticas.""")
+
+with col4:
+    with st.container(border=True):
+        st.markdown("### 📊 4. Limitaciones de la técnica estadística (ANOVA)")
+        st.markdown("""La variable dependiente mide la *percepción* subjetiva de perjuicio, no el perjuicio objetivo o real. 
+        "Por otro lado, el ANOVA exige el cumplimiento de supuestos estrictos (normalidad, homogeneidad de varianzas e independencia de las observaciones) 
+        "y requiere tratar como numéricas variables que, en algunos casos, son de naturaleza ordinal. Finalmente, el tamaño reducido de la muestra en ciertas combinaciones de nivel jerárquico y grupo de edad limita la potencia estadística del análisis.""")
+
