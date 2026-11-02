@@ -14,12 +14,13 @@ st.write("Selecciona una categoría a continuación para comenzar a navegar por 
 
 col_btn1, col_btn2, col_btn3 = st.columns(3)
 with col_btn1:
-    if st.button("**1. Antecedentes**\n\nFuentes OSMI y estudios previos", use_container_width=True,):st.session_state.seccion_teorica = "Antecedentes"
+    if st.button("**1. Antecedentes**", use_container_width=True,):st.session_state.seccion_teorica = "Antecedentes"
 
 with col_btn2:
-    if st.button("**2. Bases Conceptuales**\n\nEstrés laboral y modelos teóricos", use_container_width=True,): st.session_state.seccion_teorica = "Bases"
+    if st.button("**2. Bases Conceptuales**", use_container_width=True,): st.session_state.seccion_teorica = "Bases"
 
-with col_btn3:if st.button("**3. Fundamentos del ANOVA**\n\nEstadísticos, varianzas y supuestos",use_container_width=True,):st.session_state.seccion_teorica = "ANOVA"
+with col_btn3:
+    if st.button("**3. Fundamentos del ANOVA**",use_container_width=True,):st.session_state.seccion_teorica = "ANOVA"
 
 
 if st.session_state.seccion_teorica == "Antecedentes":
@@ -158,46 +159,110 @@ elif st.session_state.seccion_teorica == "Bases":
         promoción).
         """)
 
-st.markdown(
-""" ## 2.3 Fundamentos técnicos del ANOVA 
-El Análisis de Varianza (ANOVA) es una herramienta estadística de modelado  lineal que permite calcular si los valores esperados, usualmente medias, de dos o más grupos o condiciones experimentales son estadísticamente iguales, es decir, define si existen algunas diferencias significativas entre ellos. El ANOVA estima la proporción de la variación observada que se atribuye al factor en estudio  y se compara con la variación no explicada o residual. Aunque este modelo de datos se suele aplicar más como prueba para tres o más grupos, es posible aplicarse a dos grupos.
-Como se menciono anteriormente, el ANOVA se utiliza normalmente para probar diferencias de las medias, y esto lo hace comparando dos estimaciones de variabilidad para asi contrastar las medias:
-Variación entre grupos: Refleja la variabilidad asociada a las diferencias entre las medias de cada grupo.
-Variación dentro de los grupos: Mide la dispersión entre las observaciones respecto a la media de su propio grupo.
-Cuando las medias poblacionales son iguales, los cuadrados medios entre grupos y dentro de los grupos deben estimar aproximadamente la misma varianza de error y por lo tanto producir un estadístico F cercano a 1. Opuesto a ello, si las medias de los grupos estan separadas en relación con la variabilidad que existe dentro de los grupos, la estimación entre grupos incrementa, lo que produce un estadístico F mayor,esto aporta evidencia solida para rechazar la hipótesis nula de medias iguales. 
-###Terminología esencial de ANOVA
-**Factor:** Variable explicativa categórica.
-**Nivel de factor:** Cada una de las categorías que componen un factor.
-**Variable de respuesta:** O variable dependiente, es la medida cuantitativa que se analiza o de la cual es objeto de analisis.
-**Efecto principal:** La asociación media entre un factor y la variable de respuesta, tras considerar los demás términos del modelo.
-**Efecto de interacción:** Ocurre cuando la relación entre un factor y la variable de respuesta depende del nivel que tome otro factor.
-**Residual:** Es la diferencia entre un valor observado y el valor predicho por el modelo lineal ajustado. Muchas suposiciones acerca del ANOVA se evalúan sobre la distribución de estos residuos, más que del resultado bruto considerado sin su estructura de grupos.
-**Prueba ómnibus:** Una prueba general es una prueba estadística que se utiliza para evaluar si existen diferencias significativas entre múltiples grupos o condiciones. Un resultado significativo detecta que existe al menos una diferencia entre las medias, pero no identifica cuáles difieren directamente.
+elif st.session_state.seccion_teorica == "ANOVA":
+    st.header("2.4. Fundamentos técnicos del ANOVA")
+    st.write(
+        "El Análisis de Varianza (ANOVA) es una herramienta estadística de modelado lineal "
+        "que permite evaluar si los valores esperados de dos o más grupos son estadísticamente iguales."
+    )
 
-Existen diferentes variantes del modelo ANOVA según el estudio que se va a realizar, siendo las principales:
-**ANOVA Unidireccional:** Examina un único factor categórico y un resultado cuantitativo. Es el método estándar para comparar varias medias de grupo independientes bajo un modelo de varianza común.
-**ANOVA Bidireccional y Factorial:** Incorpora dos o mas factores de manera simultánea, este modelo puede ser mejor que realizar pruebas unidireccionales separadas porque puede revelar interacciones y estimar los efectos dentro de un modelo unificado. 
-**Otras variantes del ANOVA son:** el ANOVA de medidas repetidas, el ANOVA mixto o el ANOVA de Welch, entre otras variantes.
+    tab_anova_1, tab_anova_2, tab_anova_3 = st.tabs([
+        "📊 Lógica y Estadístico F", 
+        "📖 Terminología y Variantes", 
+        "🔍 Supuestos del Modelo"
+    ])
 
-###Supuestos del ANOVA
-Para que los resultados sean válidos, deben cumplirse los siguientes supuestos:
+    with tab_anova_1:
+        st.markdown("### ¿Cómo funciona el ANOVA?")
+        st.markdown(
+            "El ANOVA estima la proporción de la variación observada atribuible al factor en estudio y la compara con la variación "
+            "no explicada o residual. Aunque se suele aplicar para tres o más grupos, también es posible utilizarlo para dos."
+        )
 
-**Independencia de observaciones:** Las mediciones deben ser independientes entre sí, a menos que el modelo seleccionado represente explícitamente datos repetidos, emparejados, agrupados o jerárquicos. La independencia está determinada por el diseño de la investigación y el proceso de recopilación de datos.
+        st.markdown("Para contrastar las medias, compara dos estimaciones de variabilidad:")
 
-**Normalidad de los residuos:** Los residuos del modelo deben seguir una distribución aproximadamente normal. Para la verificación formal de este supuesto se aplica la prueba de Shapiro-Wilk (1965):
-la prueba se basa en la covarianza entre los valores ordenados de la muestra y los valores esperados bajo la hipótesis de normalidad. De acuerdo con la Universidad Autónoma de Coahuila (s/a), se calcula a partir de los siguientes pasos:
+        col_var1, col_var2 = st.columns(2)
+        with col_var1:
+            st.info("**Variación entre grupos**\n\nRefleja la variabilidad asociada a las diferencias entre las medias de cada grupo.")
+        with col_var2:
+            st.info("**Variación dentro de los grupos**\n\nMide la dispersión entre las observaciones respecto a la media de su propio grupo.")
 
-***Hipótesis nula (H0):*** los datos provienen de una población con distribución normal. 
-***Hipótesis alternativa (H1):*** los datos no provienen de una población con distribución normal. 
+        st.markdown("### Interpretación del Estadístico F")
+        st.markdown(
+            "- **Si las medias son iguales:** Los cuadrados medios entre y dentro de los grupos estiman "
+            "aproximadamente la misma varianza de error, produciendo un **estadístico F cercano al valor de 1**.\n"
+            "- **Si las medias difieren:** La estimación entre grupos aumenta, generando un **estadístico F mayor**, "
+            "lo que aporta evidencia sólida para rechazar la hipótesis nula de medias iguales."
+        )
 
-No se debe usar esta prueba de normalidad como un pase directo ya que en las muestras pequeñas el contraste tiene poca potencia, y con muestras muy grandes es posible que detecte desviaciones que no tienen consecuencias prácticas para los contrastes paramétricos.
+    with tab_anova_2:
+        st.markdown("### Terminología esencial de ANOVA")
 
+        col_t1, col_t2 = st.columns(2)
+        with col_t1:
+            st.markdown(
+                "- **Factor:** Variable explicativa categórica.\n"
+                "- **Nivel de factor:** Cada categoría que compone un factor.\n"
+                "- **Variable de respuesta:** Medida cuantitativa analizada (dependiente).\n"
+                "- **Efecto principal:** Asociación media entre un factor y la respuesta."
+            )
+        with col_t2:
+            st.markdown(
+                "- **Efecto de interacción:** Ocurre cuando la relación depende del nivel de otro factor.\n"
+                "- **Residual:** Diferencia entre un valor observado y el valor predicho.\n"
+                "- **Prueba ómnibus:** Evalúa si existen diferencias globales significativas entre múltiples grupos."
+            )
 
-**Homogeneidad de varianzas:** El ANOVA clásico asume que la varianza del error es constante e igual entre los grupos. Este supuesto se evalúa formalmente mediante la prueba de Levene, la cual contrasta si las varianzas poblacionales de los grupos son equivalentes:
-Se utiliza para comprobar si varios grupos tienen la misma varianza en la población. 
-***Hipótesis nula (H0):*** Los grupos tienen varianzas iguales.
-***Hipótesis alternativa (H1):*** Los grupos tienen varianzas diferentes.
+        st.markdown("### Variantes principales del ANOVA")
+        st.markdown(
+            "- **ANOVA Unidireccional:** Examina un único factor categórico y un resultado cuantitativo.\n"
+            "- **ANOVA Bidireccional y Factorial:** Incorpora dos o más factores de manera simultánea para revelar interacciones.\n"
+            "- **Otras variantes:** El ANOVA de medidas repetidas, el ANOVA mixto o el ANOVA de Welch."
+        )
 
-**Ausencia de observaciones altamente influyentes:** El ANOVA se basa en desviaciones al cuadrado, por lo que se tiene que comprobar que el modelo no este sesgado por valores extremos (outliers), ya que observaciones extremas pueden influir fuertemente en medias, suma de cuadrados y estadísticas F. Cualquier exclusión o análisis de sensibilidad debe documentarse de forma transparente.
-"""
-)
+    with tab_anova_3:
+        st.markdown("### Supuestos para la validez del ANOVA")
+        st.write("Para que los resultados sean válidos, deben cumplirse rigurosamente los siguientes supuestos:")
+
+        with st.expander("📌 1. Independencia de observaciones"):
+            st.write(
+                "Las mediciones deben ser independientes entre sí, a menos que el modelo represente "
+                "explícitamente datos repetidos, emparejados o jerárquicos. La independencia está determinada "
+                "por el diseño de la investigación y el proceso de recopilación de datos."
+            )
+
+        with st.expander("📌 2. Normalidad de los residuos (Prueba de Shapiro-Wilk)"):
+            st.write(
+                "Los residuos del modelo deben seguir una distribución aproximadamente normal. "
+                "Para su verificación formal se aplica la **prueba de Shapiro-Wilk (1965)**:"
+            )
+            
+            col_h1, col_h2 = st.columns(2)
+            with col_h1:
+                st.error("**Hipótesis Nula (H0):**\n\n Los datos provienen de una población con distribución normal.")
+            with col_h2:
+                st.success("**Hipótesis Alternativa (H1):**\n\n Los datos no provienen de una población normal.")
+
+            st.warning(
+                "⚠️ **Nota práctica:** No debe usarse como un pase directo automático; en muestras pequeñas "
+                "tiene poca potencia, y con muestras muy grandes puede detectar desviaciones sin consecuencias prácticas."
+            )
+
+        with st.expander("📌 3. Homogeneidad de varianzas (Prueba de Levene)"):
+            st.write(
+                "El ANOVA clásico asume que la varianza del error es constante e igual entre los grupos. "
+                "Se evalúa formalmente mediante la **prueba de Levene**:"
+            )
+            
+            col_l1, col_l2 = st.columns(2)
+            with col_l1:
+                st.error("**Hipótesis Nula (H0):**\n\n Los grupos tienen varianzas iguales.")
+            with col_l2:
+                st.success("**Hipótesis Alternativa (H1):**\n\n Los grupos tienen varianzas diferentes.")
+
+        with st.expander("📌 4. Ausencia de observaciones altamente influyentes"):
+            st.write(
+                "El ANOVA se basa en desviaciones al cuadrado, por lo que se debe comprobar que el modelo "
+                "no esté sesgado por valores extremos (*outliers*), ya que pueden alterar fuertemente las medias, las sumas de cuadrados y "
+                "la estadística F. Cualquier exclusión debe documentarse de forma transparente."
+            )
