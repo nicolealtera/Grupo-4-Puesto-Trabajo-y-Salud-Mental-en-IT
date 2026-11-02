@@ -14,18 +14,18 @@ st.write("Selecciona una categoría a continuación para comenzar a navegar por 
 
 col_btn1, col_btn2, col_btn3 = st.columns(3)
 with col_btn1:
-    if st.button("**1. Antecedentes**", use_container_width=True,):st.session_state.seccion_teorica = "Antecedentes"
+    if st.button("**Antecedentes y Contexto**", use_container_width=True,):st.session_state.seccion_teorica = "Antecedentes"
 
 with col_btn2:
-    if st.button("**2. Bases Conceptuales**", use_container_width=True,): st.session_state.seccion_teorica = "Bases"
+    if st.button("**Bases y Terminos**", use_container_width=True,): st.session_state.seccion_teorica = "Bases"
 
 with col_btn3:
-    if st.button("**3. Fundamentos del ANOVA**",use_container_width=True,):st.session_state.seccion_teorica = "ANOVA"
+    if st.button("**Fundamentos del ANOVA**",use_container_width=True,):st.session_state.seccion_teorica = "ANOVA"
 
 
 if st.session_state.seccion_teorica == "Antecedentes":
-    st.header("1. Antecedentes de la investigación")
-    st.subheader("1.1. La base OSMI como fuente científica")
+    st.header("Antecedentes de la investigación")
+    st.subheader("La base OSMI como fuente científica")
     st.markdown("""
     La **Open Sourcing Mental Illness (OSMI) Mental Health in Tech Survey** es una de las principales
     fuentes de datos de autorreporte sobre salud mental en el sector tecnológico. Creada por la organización
@@ -42,7 +42,7 @@ if st.session_state.seccion_teorica == "Antecedentes":
     """)
 
 
-    st.subheader("1.2. Antecedente directo: estudios que emplean la base OSMI")
+    st.subheader("Antecedente directo: estudios que emplean la base OSMI")
     st.markdown("""
        Diversos trabajos han utilizado la encuesta **OSMI** para el análisis cuantitativo de la salud mental
     en el sector tecnológico. **Rado y Neagu (2019)** emplearon la encuesta para predecir la probabilidad
@@ -59,10 +59,50 @@ if st.session_state.seccion_teorica == "Antecedentes":
     examinada sistemáticamente en la literatura existente.
     """)
 
+    st.header("Contexto histórico e internacional de la salud mental")
+    st.write("A continuación, se presenta la evolución de los derechos laborales, los modelos de estrés y el reconocimiento de la salud mental en el ámbito organizacional.")
+    
+    st.write("")
+    
+    tab_c1, tab_c2, tab_c3, tab_c4 = st.tabs([
+            "1872 - 1948 ➔", 
+            "1979 - 1984 ➔", 
+            "1990 - 2006 ➔", 
+            "2014 - Hoy"
+        ])
+        
+    with tab_c1:
+        with st.container(border=True):
+            st.write(
+                "La creación de la OMS es un hecho anterior a su constitución el 7 de abril de 1948. "
+                "Los programas de seguridad social Von Bismarck sirven de precedente al sistema de bienestar social de Estados Unidos y como antecedente a la constitución "
+                "de la Organización Internacional del Trabajo (OIT) en 1919, para reflejar que la justicia social es esencial para alcanzar la paz universal. Esto se complementa "
+                "con el Informe de Massachusetts de 1872 y la Ley Williams-Steiger de Seguridad y Salud Ocupacional en 1970.")
+    
+    with tab_c2:
+        with st.container(border=True):
+            st.write(
+                "Las agencias de la ONU actúan en colaboración en asuntos de interés común, como la salud mental en el trabajo. Para 1979 surge el Modelo Demandas-Control de Karasek, "
+                "que describe las demandas psicológicas y el control, dando lugar a estados laborales como la alta tensión (alta demanda + bajo control), trabajo activo, baja tensión y trabajo pasivo. "
+                "Este modelo se constituye como fundamento teórico de la OIT y la OMS durante 1984 para definir los factores psicosociales de las enfermedades ocupacionales.")
+    
+    with tab_c3:
+        with st.container(border=True):
+            st.write(
+                "En paralelo, durante 1990 se aprueba la Ley de Estadounidenses con Discapacidades (ADA), asimilada posteriormente en la Convención sobre los Derechos de las Personas con Discapacidad (CRPD) de 2006. "
+                "Para 1996 surge el Modelo Esfuerzo-Recompensa de Siegrist, el cual diferencia dos tipos de esfuerzo: extrínseco (demandas del trabajo) e intrínseco (motivación y sobre-compromiso). Las recompensas que obtienen los trabajadores "
+                "pueden ser monetarias, respeto y apoyo, o seguridad en el puesto y promoción.")
+    
+    with tab_c4:
+        with st.container(border=True):
+            st.write(
+                "Para el año 2014 se registra la iniciativa de la corporación sin fines de lucro Open Sourcing Mental Health (OSMI), creada por Ed Finkler, cuyas encuestas desde 2014 a 2019 sirvieron de base de datos bruta a esta investigación. "
+                "Finalmente, la 11.ª revisión de la Clasificación Internacional de Enfermedades (CIE-11) define el agotamiento laboral como un fenómeno ocupacional. De tal manera que queda en evidencia que la salud mental no es una tendencia sino un tema "
+                "de interés legítimo y de vanguardia.")
 
 elif st.session_state.seccion_teorica == "Bases": 
-    st.header("2. Bases conceptuales")
-    st.subheader("2.1. Estrés laboral y salud mental")
+    st.header("Bases conceptuales")
+    st.subheader("Estrés laboral y salud mental")
     st.markdown("""
         El **estrés laboral** es un factor de riesgo crónico de carácter psicosocial que afecta la 
         salud de los trabajadores a través de reacciones emocionales, cognitivas y fisiológicas
@@ -79,7 +119,7 @@ elif st.session_state.seccion_teorica == "Bases":
         preexistentes.
         """)
 
-    st.subheader("2.2. Categorías de riesgos psicosociales en el sector IT")
+    st.subheader("Categorías de riesgos psicosociales en el sector IT")
     st.markdown("""
     Con base en las *Directrices de la Organización Mundial de la Salud* (en adelante OMS)
     sobre salud mental en el trabajo, se identifican varias categorías de riesgos psicosociales
@@ -94,7 +134,7 @@ elif st.session_state.seccion_teorica == "Bases":
    - **Interfaz hogar–trabajo:** exigencias contradictorias entre el trabajo y el hogar, poco apoyo en las responsabilidades de cuidado.
     """)
 
-    st.subheader("2.3. Modelos teóricos del estrés laboral")
+    st.subheader("Modelos teóricos del estrés laboral")
     st.markdown("""
     Los modelos teóricos que explican el estrés laboral consideran factores psicosociales
     como las exigencias psicológicas, el control sobre el contenido del trabajo y el apoyo
@@ -159,8 +199,73 @@ elif st.session_state.seccion_teorica == "Bases":
         promoción).
         """)
 
+    st.subheader("Jerarquía organizacional")
+    st.markdown("""
+    > **La jerarquía organizacional** es la estructura ordenada en la que se distribuyen responsabilidades y el poder dentro de una empresa, facilitando asi la comunicación y la toma de decisiones.
+    
+    Según Karasek y sus modelos de estres, los puestos de niveles inferiores suelen caracterizarse por una mayor dependencia jerárquica y una supervisión más estrecha. Esta configuración se traduce en una menor latitud de decisión, que se refiere al margen de maniobra que tiene un trabajador para organizar sus tareas y tomar decisiones. Y una mayor exposición a las demandas, lo que hace a los trabajadores operativos potencialmente más vulnerables al estrés y a percibir consecuencias negativas para su carrera.
+    """)
+    st.divider()
+
+    st.subheader("Confianza hacia el liderazgo")
+    st.markdown("""
+    > La confianza en el liderazgo actúa como un **mediador crucial** entre el estilo de mandato y el bienestar de los empleados.
+    
+    El liderazgo transformacional inspira, motiva y desarrolla a los seguidores, fomentando relaciones de confianza. Gracias a Perilla-Toro y Gómez-Ortiz, 2017, podemos decir que este estilo de liderazgo se relaciona positivamente con el bienestar psicológico, teniendo a la confianza en el líder como su principal efecto mediador. Un entorno de seguridad psicológica reduce el miedo a ser estigmatizado.
+    """)
+
+    st.divider()
+
+    st.subheader("Percepción del perjuicio profesional")
+    st.markdown("""
+    > Se cree que es la **creencia de que divulgar una condición de salud mental** tendrá consecuencias negativas en el desarrollo de la carrera, las oportunidades laborales o su estatus dentro de la organización.
+    
+    Esto se relaciona directamente con el estigma percibido y el miedo a la discriminación. Y su importancia en el sector tecnologico radica en la cultura de alto rendimiento, la competitividad y la presion constante por la innovación. Todos estos factores aumenta el temor a ser percibido como vulnerable, poco productivo o incapaz de soportar la carga. Esto lleva a los trabajadores a ocultar sus condiciones, agravando el como los empleados perciben colectivamente su entorno de trabajo, las políticas de la empresa y las relaciones humanas en el día a día.
+    """)
+    
+    st.divider()
+    
+    st.header("Definición de términos básicos")
+    
+    tab_t1, tab_t2, tab_t3, tab_t4 = st.tabs([
+        "🧠 Salud y Prejuicio", 
+        "🚫 Estigma", 
+        "🏢 Jerarquía y Liderazgo", 
+        "💻 Edad y Sector"
+    ])
+
+    with tab_t1:
+        st.markdown("### Salud mental")
+        st.write("Se define como el \"estado de bienestar mental que permite a las personas hacer frente a los momentos de estrés de la vida, desarrollar todas sus habilidades, aprender y trabalhar adecuadamente e integrarse en su entorno\". Constituye un valor intrínseco y fundamental de las personas, formando parte esencial del bienestar general.")
+        
+        st.markdown("### Percepción de prejuicio profesional")
+        st.write("Se refiere a los estereotipos sociales sobre las enfermedades mentales que generan actitudes y comportamientos negativos, en ocasiones inconscientes. Incluye el pesimismo terapéutico y el estigma en el entorno laboral (De Angelis, 2024).")
+
+    with tab_t2:
+        st.markdown("### Estigma")
+        st.write("Suele surgir de una falta de conocimiento o de miedo. En el ámbito de la salud mental, se identifican estos tipos de estigma:")
+        st.markdown("- **Estigma público:** Actitudes negativas o discriminatorias que otras personas tienen sobre la enfermedad mental.""- **Autoestigma:** Actitudes negativas que tienen las personas sobre su propia enfermedad mental, incluyendo sentir vergüenza.")
+        st.markdown("- **Estigma institucional:** Es sistémico e implica políticas del gobierno y organizaciones que limitan las oportunidades de las personas con enfermedad mental.")
+        st.markdown("- **Factores subyacentes:** Miedo/evitación, malevolencia, autoritarismo e imprevisibilidad.")
+
+    with tab_t3:
+        st.markdown("### Jerarquía laboral")
+        st.write("De acuerdo con la Escuela de Negocios de Madrid, es \"el sistema formal que establece el orden, la subordinación y las líneas de reporte entre los diferentes niveles de autoridad dentro de una organización\". Para efectos de la investigación, se operacionaliza en tres niveles: Directivo, Coordinación y Operativo.")
+        
+        st.markdown("### Confianza en el liderazgo")
+        st.write("Se fundamenta en la premisa de que \"la confianza es el ingrediente más importante para construir un equipo\" (Covey). Nace de dos dimensiones: el carácter y la competencia.")
+
+    with tab_t4:
+        st.markdown("### Edad")
+        st.write("Se refiere a la edad en años cumplidos, es decir, al número de aniversarios del nacimiento transcurridos hasta la fecha de referencia.")
+        
+        st.markdown("### Sector tecnológico")
+        st.write("""Es el conjunto de actividades económicas y organizaciones dedicadas a la investigación, desarrollo, fabricación, comercialización y prestación de servicios relacionados con la tecnología. 
+        Abarca áreas como el desarrollo de software, la infraestructura de hardware, las telecomunicaciones, los servicios de TI (Tecnologías de la Información), la computación en la nube y el análisis de datos. 
+        Este sector se caracteriza por su rápido ritmo de innovación, la alta exigencia de actualización técnica, una cultura orientada a resultados y entornos de trabajo altamente competitivos.""")
+
 elif st.session_state.seccion_teorica == "ANOVA":
-    st.header("2.4. Fundamentos técnicos del ANOVA")
+    st.header("Fundamentos técnicos del ANOVA")
     st.write(
         "El Análisis de Varianza (ANOVA) es una herramienta estadística de modelado lineal "
         "que permite evaluar si los valores esperados de dos o más grupos son estadísticamente iguales."

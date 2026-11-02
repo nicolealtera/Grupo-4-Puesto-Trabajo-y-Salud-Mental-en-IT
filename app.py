@@ -60,7 +60,6 @@ def get_conn():
     except (FileNotFoundError, KeyError):
         token = os.getenv("MOTHERDUCK_TOKEN") or os.getenv("motherduck_token")
 
-    # Usamos el nombre exacto con guiones bajos que vimos en la captura
     if token:
         return duckdb.connect("md:puesto_trabajo_y_salud_mental", config={"motherduck_token": token})
     else:
