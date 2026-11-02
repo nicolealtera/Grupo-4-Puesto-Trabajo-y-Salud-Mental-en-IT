@@ -23,7 +23,43 @@ section[data-testid="stSidebar"][aria-expanded="false"]{ min-width:0; }
     transition:transform .25s ease, box-shadow .25s ease,
             background .25s ease, border-color .25s ease;
 }
+div.stButton > button {
+    width: 100%;
+    padding: 0.85rem 1.1rem;
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(23,89,124,.50), rgba(23,89,124,.22));
+    border: 1.5px solid #1F6D96;
+    color: #F5EEDD !important;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(4,22,33,.45),
+            inset 0 1px 0 rgba(245,238,221,.12);
+    transition: transform .25s ease, box-shadow .25s ease,
+            background .25s ease, border-color .25s ease;
+}
 
+div.stButton > button p {
+    color: #F5EEDD !important;
+    font-size: 1.12rem;
+    font-weight: 700;
+}
+
+div.stButton > button:hover {
+    background: linear-gradient(180deg, #1F6D96, #17597C);
+    border-color: #2B80AD;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(4,22,33,.55),
+            inset 0 1px 0 rgba(245,238,221,.18);
+}
+
+div.stButton > button:active, div.stButton > button:focus {
+    background: #17597C !important;
+    border-color: #17597C !important;
+    color: #F5EEDD !important;
+    transform: translateY(0);
+    box-shadow: inset 0 3px 8px rgba(4,22,33,.5),
+            0 1px 0 rgba(245,238,221,.10) !important;
+}
 /* teexto */
 [data-testid="stSidebar"] [data-testid="stPageLink-NavLink"] p{
     color:#F5EEDD !important;
@@ -79,9 +115,17 @@ button[data-baseweb="tab"][aria-selected="true"]{ background:#84B3CE; }
 
 /* metricas */
 [data-testid="stMetric"]{
-    background:rgba(132,179,206,.30);
-    border-radius:18px;
-    padding:1rem 1.3rem;
+    background: rgba(132,179,206,.30);
+    border-radius: 18px;
+    padding: 1rem 1.3rem;
+    border: 2px solid transparent; 
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-testid="stMetric"]:hover {
+    transform: translateY(-3px); 
+    border-color: #17597C;
+    box-shadow: 0 0 12px rgba(23, 89, 124, 0.4); 
 }
 </style>
 """
