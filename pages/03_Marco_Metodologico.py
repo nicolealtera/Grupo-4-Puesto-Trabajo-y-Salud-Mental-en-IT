@@ -2,105 +2,110 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(page_title="Marco Metodológico", page_icon="🧪", layout="wide")
+st.image("assets/metologico.png", use_container_width=True)
 
-st.header("Marco Metodológico")
+if "seccion_metodologica" not in st.session_state:
+    st.session_state.seccion_metodologica = "Enfoque"
 
-st.subheader("1. Enfoque y Diseño de la Investigación")
-col1, col2 = st.columns(2, gap="medium")
+col_btn1, col_btn2, col_btn3 = st.columns(3)
 
-with col1:
-    with st.container(border=True):
-        st.markdown("### Enfoque")
+with col_btn1:
+    if st.button("Enfoque y Diseño", use_container_width=True):
+        st.session_state.seccion_metodologica = "Enfoque"
+
+with col_btn2:
+    if st.button("Limpieza de Datos", use_container_width=True):
+        st.session_state.seccion_metodologica = "Limpieza"
+
+with col_btn3:
+    if st.button("Diccionario y Limitaciones", use_container_width=True):
+        st.session_state.seccion_metodologica = "Diccionario"
+
+
+if st.session_state.seccion_metodologica == "Enfoque":
+    st.subheader("1. Enfoque y Diseño de la Investigación")
+    col1, col2 = st.columns(2, gap="medium")
+
+    with col1:
+        with st.container(border=True):
+            st.markdown("### Enfoque")
+            st.markdown(
+                "**Cuantitativo.** La investigación se basa en la recolección y el análisis de "
+                "datos numéricos para probar hipótesis y establecer patrones de comportamiento "
+                "en la población estudiada.")
+
+    with col2:
+        with st.container(border=True):
+            st.markdown("### Diseño")
+            st.markdown(
+                "**No experimental, transversal y descriptivo-inferencial.** "
+                "No se manipulan las variables; los datos se recolectan en un único momento "
+                "para describir las variables y analizar su incidencia e interrelación.")
+
+    st.subheader("2. Población y Muestra")
+    st.info("""
+        **Población:** Profesionales que desarrollan su actividad en el sector tecnológico," 
+        cuyos datos fueron recolectados a través de las encuestas OSMI (Open Sourcing Mental Illness).""")
+
+    col_p1, col_p2, col_p3 = st.columns(3)
+
+    with col_p1:
+        st.metric(label="Sector de estudio", value="Tecnológico")
+    with col_p2:
+        st.metric(label="Fuente de datos", value="OSMI Survey")
+    with col_p3:
+        st.metric(label="Tipo de muestreo", value="Autoseleción")
+
+    st.write("")
+    st.markdown("""La muestra se compone de los registros válidos de la base OSMI que cumplen con los 
+    "criterios de inclusión: pertenecer al sector tecnológico y haber respondido a las 
+    "variables de interés (nivel jerárquico, edad y percepción de perjuicio).""")
+
+    st.divider()
+
+elif st.session_state.seccion_metodologica == "Limpieza":
+    st.header("Proceso de limpieza y normalización de datos")
+    st.markdown("El tratamiento, depuración y normalización de la base de datos se llevó a cabo ")
+
+    with st.container(height=400, border=True):
+        st.subheader(" Fase de normalización.")
         st.markdown(
-            "**Cuantitativo.** La investigación se basa en la recolección y el análisis de "
-            "datos numéricos para probar hipótesis y establecer patrones de comportamiento "
-            "en la población estudiada."
-        )
-
-with col2:
-    with st.container(border=True):
-        st.markdown("### Diseño")
+            "Para empezar a trabajar con los datos de forma eficiente se tuvieron que ordenar de forma normalizada, "
+            "asegurándonos así que la información fuese consistente y lógica en todo el sistema, al evitar datos duplicados e información innecesaria.")
+    
         st.markdown(
-            "**No experimental, transversal y descriptivo-inferencial.** "
-            "No se manipulan las variables; los datos se recolectan en un único momento "
-            "para describir las variables y analizar su incidencia e interrelación."
-        )
-
-st.subheader("2. Población y Muestra")
-
-st.info(
-    "**Población:** Profesionales que desarrollan su actividad en el sector tecnológico, "
-    "cuyos datos fueron recolectados a través de las encuestas OSMI (Open Sourcing Mental Illness)."
-)
-
-col_p1, col_p2, col_p3 = st.columns(3)
-
-with col_p1:
-    st.metric(label="Sector de estudio", value="Tecnológico")
-with col_p2:
-    st.metric(label="Fuente de datos", value="OSMI Survey")
-with col_p3:
-    st.metric(label="Tipo de muestreo", value="No probabilístico")
-
-st.write("")
-st.markdown(
-    "La muestra se compone de los registros válidos de la base OSMI que cumplen con los "
-    "criterios de inclusión: pertenecer al sector tecnológico y haber respondido a las "
-    "variables de interés (nivel jerárquico, edad y percepción de perjuicio)."
-)
-
-st.divider()
-
-st.header("4.2. Proceso de limpieza y normalización de datos")
-st.markdown(
-    "El tratamiento, depuración y normalización de la base de datos se llevó a cabo "
-)
-
-with st.container(border=True):
-    st.subheader("Fase de normalización.")
-    st.markdown(
-        "Para empezar a trabajar con los datos de forma eficiente se tuvieron que ordenar de forma normalizada, "
-        "asegurándonos así que la información fuese consistente y lógica en todo el sistema, al evitar datos duplicados e información innecesaria."
-    )
+            "El mayor reto en esta base de datos es que la información ya se encuentra organizada mediante un EAV (Entidad Atributo Valor), "
+            "un esquema muy eficiente para recolectar, modificar o eliminar datos dispersos, pues permite almacenarlos sin necesidad de "
+            "modificar el esquema relacional cada vez que se agrega una nueva propiedad, de forma en la que cada dato se almacena como una fila, "
+            "indicando la entidad que pertenece, su atributo y su valor (no cambia el esquema porque los atributos son datos no columnas). "
+            "Resulta que este tipo de esquema es pésimo en cuanto al rendimiento al realizar consultas y los datos no tienen integridad en cuanto a su tipo, "
+            "por lo que es necesario pasarlo a un modelo normalizado relacional siguiendo cierta lógica.")
     
-    st.markdown(
-        "El mayor reto en esta base de datos es que la información ya se encuentra organizada mediante un EAV (Entidad Atributo Valor), "
-        "un esquema muy eficiente para recolectar, modificar o eliminar datos dispersos, pues permite almacenarlos sin necesidad de "
-        "modificar el esquema relacional cada vez que se agrega una nueva propiedad, de forma en la que cada dato se almacena como una fila, "
-        "indicando la entidad que pertenece, su atributo y su valor (no cambia el esquema porque los atributos son datos no columnas). "
-        "Resulta que este tipo de esquema es pésimo en cuanto al rendimiento al realizar consultas y los datos no tienen integridad en cuanto a su tipo, "
-        "por lo que es necesario pasarlo a un modelo normalizado relacional siguiendo cierta lógica."
-    )
+        st.markdown(
+            "El primer paso es identificar qué datos vamos a usar en la investigación (en este caso las preguntas), para seleccionar y "
+            "reorganizar solamente esos datos que se necesitan sin complicarse con el resto de información necesaria, que serían las respuestas "
+            "de las preguntas 1, 2, 3, 50, 117, 115, 51, 4, 89, 7, 34, 115, 118, 5, 13, 68, 113, 49, 114, 31, 105, 16, 15, 14, 10, 11.")
     
-    st.markdown(
-        "El primer paso es identificar qué datos vamos a usar en la investigación (en este caso las preguntas), para seleccionar y "
-        "reorganizar solamente esos datos que se necesitan sin complicarse con el resto de información necesaria, que serían las respuestas "
-        "de las preguntas 1, 2, 3, 50, 117, 115, 51, 4, 89, 7, 34, 115, 118, 5, 13, 68, 113, 49, 114, 31, 105, 16, 15, 14, 10, 11."
-    )
+        st.markdown(
+            "El segundo paso es estructurar como se verá el diagrama de relaciones (DER), usando DBdiagram para tener un rumbo hecho al momento de crear "
+            "tablas con información. Se nos ha ocurrido agrupar la información en distintas entidades con respecto a su enfoque. Primero dos entidades "
+            "principales, una entidad de participantes para identificar las características esenciales de quien respondió, otra entidad para las encuestas "
+            "que identifica las encuestas que se realizaron, de esas dos entidades partirán y se podrán identificar las demás que tienen la información "
+            "para resolver los objetivos, se puede decir son las entidades de conexión. Segundo las entidades que agrupan la información según a la categoría "
+            "que pertenecen, una que identifique la categoría laboral y todo lo que describe la situación de trabajo, otra que identifique el estado mental y "
+            "todo lo referente a su salud y problemas mentales, otra que identifique cómo impacta la salud mental a nivel profesional según cada persona, "
+            "otra que diga que ayuda ofrece cada compañía de trabajo en el ámbito laboral y otra que contenga una aproximación al prejuicio que existe en el "
+            "ámbito laboral. Por último están las entidades que tendrán información que ayude a respetar el esquema normalizado relacional y no duplique los datos.")
     
-    st.markdown(
-        "El segundo paso es estructurar como se verá el diagrama de relaciones (DER), usando DBdiagram para tener un rumbo hecho al momento de crear "
-        "tablas con información. Se nos ha ocurrido agrupar la información en distintas entidades con respecto a su enfoque. Primero dos entidades "
-        "principales, una entidad de participantes para identificar las características esenciales de quien respondió, otra entidad para las encuestas "
-        "que identifica las encuestas que se realizaron, de esas dos entidades partirán y se podrán identificar las demás que tienen la información "
-        "para resolver los objetivos, se puede decir son las entidades de conexión. Segundo las entidades que agrupan la información según a la categoría "
-        "que pertenecen, una que identifique la categoría laboral y todo lo que describe la situación de trabajo, otra que identifique el estado mental y "
-        "todo lo referente a su salud y problemas mentales, otra que identifique cómo impacta la salud mental a nivel profesional según cada persona, "
-        "otra que diga que ayuda ofrece cada compañía de trabajo en el ámbito laboral y otra que contenga una aproximación al prejuicio que existe en el "
-        "ámbito laboral. Por último están las entidades que tendrán información que ayude a respetar el esquema normalizado relacional y no duplique los datos."
-    )
+        st.markdown(
+            "El tercer paso una vez conseguida la estructura es crear la entidades y llenarlas dentro de DBeaver usando SQlite. Usando la base de datos original "
+            "se creó otra base de datos duplicada para empezar a trabajar sin afectar la información original, se crearon todas las tablas y se rellenaron "
+            "usando como entidad principal relacional la tabla Answers, con ella se pudo introducir toda la información que pertenece a cada usuario y "
+            "encuesta con códigos sencillos como case when, group by, joins y algunas subconsultas.")
     
-    st.markdown(
-        "El tercer paso una vez conseguida la estructura es crear la entidades y llenarlas dentro de DBeaver usando SQlite. Usando la base de datos original "
-        "se creó otra base de datos duplicada para empezar a trabajar sin afectar la información original, se crearon todas las tablas y se rellenaron "
-        "usando como entidad principal relacional la tabla Answers, con ella se pudo introducir toda la información que pertenece a cada usuario y "
-        "encuesta con códigos sencillos como case when, group by, joins y algunas subconsultas."
-    )
-    
-    st.markdown(
-        "El último paso, fue confirmar que toda la información coincidiera con los datos originales para así desvincular las entidades originales "
-        "(Answer, Question y Survey) y tener nuestra propia base de datos a partir de ella sin necesidad de usarla nuevamente."
-    )
+        st.markdown(
+            "El último paso, fue confirmar que toda la información coincidiera con los datos originales para así desvincular las entidades originales "
+            "(Answer, Question y Survey) y tener nuestra propia base de datos a partir de ella sin necesidad de usarla nuevamente.")
 
 st.subheader("Fases técnicas de la limpieza")
 
