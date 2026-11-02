@@ -11,3 +11,6 @@ __pycache__/
 .env
 *.env
 !.env.ejemplo
+#ignora archivos de powerbi
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
