@@ -53,6 +53,22 @@ div.stButton > button p {
     font-size: 1rem !important;
     font-weight: 600 !important;
 }
+[data-testid="stPopover"] button {
+    background-color: transparent !important;
+    border: 1px solid #84B3CE !important;
+    color: #17597C !important;
+    box-shadow: none !important;
+    border-radius: 50px !important;
+}
+[data-testid="stPopover"] button:hover {
+    background-color: rgba(132, 179, 206, 0.15) !important;
+    border-color: #17597C !important;
+    color: #17597C !important;
+}
+[data-testid="stPopover"] button p {
+    color: #17597C !important;
+    font-weight: 600 !important;
+}
 
 /* teexto */
 [data-testid="stSidebar"] [data-testid="stPageLink-NavLink"] p{
