@@ -41,7 +41,7 @@ El sistema original utilizaba un esquema EAV (Entidad-Atributo-Valor) que, aunqu
 
 A partir de estas bases, la información útil se organizó en entidades categóricas dependientes que agrupan los datos por dominios temáticos —como situación laboral, estado mental, impacto profesional, apoyo corporativo y prejuicios— vinculados de forma uno a uno con los participantes y uno a muchos con las encuestas. Asimismo, se separaron las dependencias transitivas en catálogos independientes de referencia para los puestos, géneros, países y estados, logrando una estructura consistente, sin duplicidades y altamente optimizada para consultas analíticas.
 
-![Visualización](./assets/der_normalizacion.png)
+![Visualización](./assets/DER_normalizacion.png)
 
 ---
 
