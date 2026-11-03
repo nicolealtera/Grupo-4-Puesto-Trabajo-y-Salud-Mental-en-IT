@@ -35,6 +35,14 @@ En proceso
 
 ### 📌 [**Mental Health in the Tech Industry**](https://www.kaggle.com/datasets/anth7310/mental-health-in-the-tech-industry)
 
+### Fase de normalización
+
+El sistema original utilizaba un esquema EAV (Entidad-Atributo-Valor) que, aunque flexible para recolectar datos dispersos, presentaba problemas de rendimiento y carecía de integridad de tipos, por lo que se rediseñó la información hacia un modelo relacional normalizado en Tercera Forma Normal (3FN). Para lograrlo, se filtraron únicamente las variables clave de la investigación y se establecieron dos entidades principales independientes (Participantes y Encuestas) que eliminan las dependencias parciales de la 2FN y sirven de anclaje para todo el sistema.
+
+A partir de estas bases, la información útil se organizó en entidades categóricas dependientes que agrupan los datos por dominios temáticos —como situación laboral, estado mental, impacto profesional, apoyo corporativo y prejuicios— vinculados de forma uno a uno con los participantes y uno a muchos con las encuestas. Asimismo, se separaron las dependencias transitivas en catálogos independientes de referencia para los puestos, géneros, países y estados, logrando una estructura consistente, sin duplicidades y altamente optimizada para consultas analíticas.
+
+![Visualización](./assets/der_normalizacion.png)
+
 ---
 
 ## Guía de instalación y uso:
