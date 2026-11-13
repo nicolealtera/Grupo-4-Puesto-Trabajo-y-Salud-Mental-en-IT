@@ -61,8 +61,6 @@ if st.session_state.seccion_metodologica == "Enfoque":
     "criterios de inclusión: pertenecer al sector tecnológico y haber respondido a las 
     "variables de interés (nivel jerárquico, edad y percepción de perjuicio).""")
 
-    st.divider()
-
 elif st.session_state.seccion_metodologica == "Limpieza":
     st.header("Proceso de limpieza y normalización de datos")
     st.markdown("El tratamiento, depuración y normalización de la base de datos se llevó a cabo ")
@@ -70,198 +68,173 @@ elif st.session_state.seccion_metodologica == "Limpieza":
     with st.container(height=400, border=True):
         st.subheader("Fase de normalización.")
 
-st.markdown(
-    "Para empezar a trabajar con los datos de forma eficiente se tienen que ordenar de forma normalizada, "
-    "asegurándonos así que la información sea consistente y lógica en todo el sistema, al evitar datos duplicados e información innecesaria."
-)
-
-st.markdown(
-    "El mayor reto en esta base de datos es que la información ya se encuentra organizada mediante un EAV (Entidad Atributo Valor), "
-    "un esquema muy eficiente para recolectar, modificar o eliminar datos dispersos, pues permite almacenarlos sin necesidad de "
-    "modificar el esquema relacional cada vez que se agrega una nueva propiedad, de forma en la que cada dato se almacena como una fila, "
-    "indicando a la entidad que pertenece, su atributo y su valor (no cambia el esquema porque los atributos son datos no columnas). "
-    "Resulta que este tipo de esquema es pésimo en cuanto al rendimiento al realizar consultas y los datos no tienen integridad en cuanto a su tipo, "
-    "por lo que es necesario reorganizar la información útil en un modelo normalizado relacional (3FN)."
-)
-
-st.markdown(
-    "Para reorganizar el esquema se identificó qué datos íbamos a usar en la investigación (en este caso las preguntas), para seleccionar y "
-    "reorganizar solamente esos datos que se necesitan sin complicarse con el resto de información innecesaria, que serían las respuestas de las "
-    "preguntas 1, 2, 3, 50, 117, 115, 51, 4 , 89, 7, 34, 115, 118, 5, 13, 68, 113, 49, 114, 31, 105, 16, 15, 14, 10, 11."
-)
-
-st.markdown(
-    "Se seleccionaron y crearon dos entidades principales (entidades independientes), una entidad de participantes para identificar "
-    "las características esenciales de quien respondió y otra entidad para identificar las encuestas que se realizaron, asegurandonos "
-    "que se eliminen las relaciones parciales(2FN),(que solo dependan de una clave o de la otra) de esas dos entidades parten las demás "
-    "que tienen la información para resolver los objetivos, se puede decir son las entidades de conexión."
-)
-
-st.markdown(
-    "Se separó la información (respuestas) útil de la tabla origen answer por grupos o categorías que representan las demás entidades, "
-    "cuyas entidades son observaciones que satisfacen en su conjunto a la categoría que representan, y están identificadas por una clave "
-    "conjunta de las dos entidades principales, básicamente dependen de las dos principales. Se separaron por: Una entidad que identifique "
-    "la categoría laboral, lo que describe la situación de trabajo; otra que identifique el estado mental, lo referente a su salud y condiciones "
-    "o trastornos mentales; otra que identifique cómo impacta la salud mental a nivel profesional según cada persona; otra que menciona las "
-    "ayudaa ofrecidas por cada compañía de trabajo en el ámbito laboral y una última, que contenga una aproximación al prejuicio que existe en el ámbito laboral."
-)
-
-st.markdown(
-    "Por último para estructurarse mejor se separan las dependencias transitivas en todas las entidades, que contendrán a su vez información "
-    "esencial para el proyecto que se pueda verificar de forma rápida y apartada, las entidades: puesto de trabajo (identifica todos los puestos de trabajo), "
-    "género (identifica los géneros), país (identifica todos los países donde se vive y se trabaja) y estados de EEUU (identifica los países de EEUU donde se vive y se trabaja)."
-)
-
-st.markdown(
-    "En cuanto a las relaciones, todas las entidades dependientes se relacionan tanto a las dos entidades principales de participante y entidad, "
-    "con una relación uno a uno para participantes pues identifica una respuesta única por cada único participante y una relación de uno a muchos "
-    "para encuestas pues una encuesta puede ser llamada varias veces. Las demás relaciones que se crearon de las dependencias transitivas son "
-    "de uno a muchos pues aquellas entidades pueden ser llamadas varias veces donde sean requeridas."
-)
-
-st.markdown(
-    "Para el llenado de las entidades con la información pertinente se empleó como herramienta de gestión de base de datos DBeaver con el motor "
-    "de SQlite, ambos por su versatilidad para trabajar con operaciones transaccionales OLTP. A partir de la base de datos original se creó una "
-    "duplicada para empezar a trabajar sin afectar la información, se usó como entidad para extraer la información, sus dependencias y relaciones "
-    "la tabla Answers. Elaborando consultas como: Case when, group by, inner joins, left joins y algunas subconsultas, y funciones de agregación como: "
-    "Max(), Min(), Group_concat()."
-)
-
-st.markdown(
-    "Las consultas siguen un patrón muy similar para todas las entidades, la entidad de las encuestas es un duplicado de la entidad Survey, "
-    "usando INSERT de toda la tabla y la entidad de participantes es un INSERT de todos los DISTINCT usuarios que aparecen en la tabla answer "
-    "con algunas otras respuestas llamadas de la tabla answer igualmente usando subconsultas en los INNER JOINS(cuando no hay nulos en la información) "
-    "y LEFT JOINS(cuando hay nulos), son subconsultas que crean una tabla temporal con el id del usuario y el texto de las respuestas para que me "
-    "relacione cada usuario con cada respuesta requerida con un WHERE, y algunas agregan JOINS para usar las respuestas de otras tablas creadas "
-    "donde haya la misma información para ese usuario en la tabla de answer, se hace un SELECT de las respuestas de cada tabla temporal. "
-    "Las entidades derivadas de las dependencias transitivas se llenaron con un INSERT SELECT DISTINCT respuestas WHERE la(s) pregunta(s) de la tabla "
-    "answer cuyas respuestas son necesarias, para que me seleccione las respuestas distintas e identificarlas con un id que se va rellenando "
-    "por la característica de PRIMARY KEY AUTOINCREMENT. Luego para las entidades que separan la información (Respuestas), por categoría se utilizaron "
-    "INSERT de los id’s de los participantes y las encuestas para usarlos de claves primarias, para que cada usuario en cada encuesta tenga una respuesta "
-    "sin importar que sea nula; y de las respuestas que se extrajeron como están agrupadas por participante, con un MIN de la encuesta para seleccionar "
-    "la primera encuesta que respondieron y como hay que pasarla de una forma de guardado vertical a horizontal se usa un MAX que engloba un CASE WHEN "
-    "para que me devuelva únicamente la información que pertenezca a esa pregunta e ignore el resto como nulos, en una de las entidades también se usó "
-    "un GROUP_CONCAT que concatenará siguiendo cierto patrón todas las respuestas en distintas filas que haya tenido ese usuario de esa pregunta, todo "
-    "de una subconsulta en el FROM que me extraiga el usuario, la encuesta, la pregunta y la respuesta limpia de caracteres con TRIM de la tabla answer "
-    "WHERE sean únicamente las respuestas de las preguntas que se seleccionan, y en algunos casos agregando JOINS para incluir la información de otras "
-    "tablas ya creadas, donde coincida la información de ellas con las respusetas de la tabla answer."
-)
-
-st.subheader("Fases técnicas de la limpieza")
-
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
-    "Integridad y Tiempo", 
-    "Datos Demográficos", 
-    "Nivel Jerárquico", 
-    "Salud Mental y Edad", 
-    "Otros Ajustes"
-])
-with tab1:
-    st.markdown("### Corrección de integridad referencial y temporal")
-    st.markdown(
-        "Al eliminar los registros del año 2014, las tablas de respuestas se enumeraron "
-        "secuencialmente del 1 al 2958, mientras que la tabla de participantes conservaba "
-        "los IDs originales. Para corregir esto, se realizó el siguiente proceso:"
-    )
-    st.markdown(
-        "- Se leyeron las tablas desde la base de datos original filtrando solo los años **2016 a 2019**.\n"
-        "- Se implementó una tabla temporal para reorganizar secuencialmente a los participantes restantes.\n"
-        "- Se verificó que todas las tablas tuvieran exactamente los mismos **2,958 participantes**."
-    )
-    st.success("**Resultado:** Integridad referencial garantizada y consistencia estructural asegurada.")
-    
-    st.warning(
-        "**¿Por qué se eliminó 2014?** Se excluyó debido a la alta proporción de valores nulos "
-        "y a la ausencia de preguntas clave en el cuestionario original, lo que impedía realizar "
-        "un estudio comparativo fiable."
-    )
-
-with tab2:
-    st.markdown("### Estandarización de variables sociodemográficas")
-    
-    with st.container(border=True):
-        st.markdown("**País y Estado**")
         st.markdown(
-            "Se unificaron las etiquetas *'United States'* y *'United States of America'*. "
-            "El código `-1` (valor nulo) se convirtió en dato faltante real y se validó la coherencia entre estado y país."
-        )
+            "Para empezar a trabajar con los datos de forma eficiente se tienen que ordenar de forma normalizada, "
+        "asegurándonos así que la información sea consistente y lógica en todo el sistema, al evitar datos duplicados e información innecesaria.")
+
+        st.markdown(
+            "El mayor reto en esta base de datos es que la información ya se encuentra organizada mediante un EAV (Entidad Atributo Valor), "
+            "un esquema muy eficiente para recolectar, modificar o eliminar datos dispersos, pues permite almacenarlos sin necesidad de "
+            "modificar el esquema relacional cada vez que se agrega una nueva propiedad, de forma en la que cada dato se almacena como una fila, "
+            "indicando a la entidad que pertenece, su atributo y su valor (no cambia el esquema porque los atributos son datos no columnas). "
+            "Resulta que este tipo de esquema es pésimo en cuanto al rendimiento al realizar consultas y los datos no tienen integridad en cuanto a su tipo, "
+            "por lo que es necesario reorganizar la información útil en un modelo normalizado relacional (3FN)."
+            )
+
+        st.markdown(
+            "Para reorganizar el esquema se identificó qué datos íbamos a usar en la investigación (en este caso las preguntas), para seleccionar y "
+            "reorganizar solamente esos datos que se necesitan sin complicarse con el resto de información innecesaria, que serían las respuestas de las "
+            "preguntas 1, 2, 3, 50, 117, 115, 51, 4 , 89, 7, 34, 115, 118, 5, 13, 68, 113, 49, 114, 31, 105, 16, 15, 14, 10, 11.")
+
+        st.markdown(
+            "Se seleccionaron y crearon dos entidades principales (entidades independientes), una entidad de participantes para identificar "
+            "las características esenciales de quien respondió y otra entidad para identificar las encuestas que se realizaron, asegurandonos "
+            "que se eliminen las relaciones parciales(2FN),(que solo dependan de una clave o de la otra) de esas dos entidades parten las demás "
+            "que tienen la información para resolver los objetivos, se puede decir son las entidades de conexión.")
+
+        st.markdown(
+            "Se separó la información (respuestas) útil de la tabla origen answer por grupos o categorías que representan las demás entidades, "
+            "cuyas entidades son observaciones que satisfacen en su conjunto a la categoría que representan, y están identificadas por una clave "
+            "conjunta de las dos entidades principales, básicamente dependen de las dos principales. Se separaron por: Una entidad que identifique "
+            "la categoría laboral, lo que describe la situación de trabajo; otra que identifique el estado mental, lo referente a su salud y condiciones "
+            "o trastornos mentales; otra que identifique cómo impacta la salud mental a nivel profesional según cada persona; otra que menciona las "
+            "ayudaa ofrecidas por cada compañía de trabajo en el ámbito laboral y una última, que contenga una aproximación al prejuicio que existe en el ámbito laboral.")
+
+        st.markdown(
+            "Por último para estructurarse mejor se separan las dependencias transitivas en todas las entidades, que contendrán a su vez información "
+            "esencial para el proyecto que se pueda verificar de forma rápida y apartada, las entidades: puesto de trabajo (identifica todos los puestos de trabajo), "
+            "género (identifica los géneros), país (identifica todos los países donde se vive y se trabaja) y estados de EEUU (identifica los países de EEUU donde se vive y se trabaja)."
+            )
+
+        st.markdown(
+            "En cuanto a las relaciones, todas las entidades dependientes se relacionan tanto a las dos entidades principales de participante y entidad, "
+            "con una relación uno a uno para participantes pues identifica una respuesta única por cada único participante y una relación de uno a muchos "
+            "para encuestas pues una encuesta puede ser llamada varias veces. Las demás relaciones que se crearon de las dependencias transitivas son "
+            "de uno a muchos pues aquellas entidades pueden ser llamadas varias veces donde sean requeridas.")
+
+        st.markdown(
+            "Para el llenado de las entidades con la información pertinente se empleó como herramienta de gestión de base de datos DBeaver con el motor "
+            "de SQlite, ambos por su versatilidad para trabajar con operaciones transaccionales OLTP. A partir de la base de datos original se creó una "
+            "duplicada para empezar a trabajar sin afectar la información, se usó como entidad para extraer la información, sus dependencias y relaciones "
+            "la tabla Answers. Elaborando consultas como: Case when, group by, inner joins, left joins y algunas subconsultas, y funciones de agregación como: "
+            "Max(), Min(), Group_concat().")
+
+        st.markdown(
+            "Las consultas siguen un patrón muy similar para todas las entidades, la entidad de las encuestas es un duplicado de la entidad Survey, "
+            "usando INSERT de toda la tabla y la entidad de participantes es un INSERT de todos los DISTINCT usuarios que aparecen en la tabla answer "
+            "con algunas otras respuestas llamadas de la tabla answer igualmente usando subconsultas en los INNER JOINS(cuando no hay nulos en la información) "
+            "y LEFT JOINS(cuando hay nulos), son subconsultas que crean una tabla temporal con el id del usuario y el texto de las respuestas para que me "
+            "relacione cada usuario con cada respuesta requerida con un WHERE, y algunas agregan JOINS para usar las respuestas de otras tablas creadas "
+            "donde haya la misma información para ese usuario en la tabla de answer, se hace un SELECT de las respuestas de cada tabla temporal. "
+            "Las entidades derivadas de las dependencias transitivas se llenaron con un INSERT SELECT DISTINCT respuestas WHERE la(s) pregunta(s) de la tabla "
+            "answer cuyas respuestas son necesarias, para que me seleccione las respuestas distintas e identificarlas con un id que se va rellenando "
+            "por la característica de PRIMARY KEY AUTOINCREMENT. Luego para las entidades que separan la información (Respuestas), por categoría se utilizaron "
+            "INSERT de los id’s de los participantes y las encuestas para usarlos de claves primarias, para que cada usuario en cada encuesta tenga una respuesta "
+            "sin importar que sea nula; y de las respuestas que se extrajeron como están agrupadas por participante, con un MIN de la encuesta para seleccionar "
+            "la primera encuesta que respondieron y como hay que pasarla de una forma de guardado vertical a horizontal se usa un MAX que engloba un CASE WHEN "
+            "para que me devuelva únicamente la información que pertenezca a esa pregunta e ignore el resto como nulos, en una de las entidades también se usó "
+            "un GROUP_CONCAT que concatenará siguiendo cierto patrón todas las respuestas en distintas filas que haya tenido ese usuario de esa pregunta, todo "
+            "de una subconsulta en el FROM que me extraiga el usuario, la encuesta, la pregunta y la respuesta limpia de caracteres con TRIM de la tabla answer "
+            "WHERE sean únicamente las respuestas de las preguntas que se seleccionan, y en algunos casos agregando JOINS para incluir la información de otras "
+            "tablas ya creadas, donde coincida la información de ellas con las respusetas de la tabla answer.")
+
+    st.subheader("Fases técnicas de la limpieza")
+
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Integridad y Tiempo", "Datos Demográficos", "Nivel Jerárquico", "Salud Mental y Edad", "Otros Ajustes"])
+    
+    with tab1:
+        st.markdown("### Corrección de integridad referencial y temporal")
+        st.markdown(
+            "Al eliminar los registros del año 2014, las tablas de respuestas se enumeraron "
+            "secuencialmente del 1 al 2958, mientras que la tabla de participantes conservaba "
+            "los IDs originales. Para corregir esto, se realizó el siguiente proceso:")
         
-    with st.container(border=True):
-        st.markdown("**Género**")
         st.markdown(
-            "Se agruparon los 101 textos originales en tres macrocategorías: "
-            "**Femenino, Masculino y Otro**. Las respuestas sin sentido se marcaron como faltantes."
-        )
+            "- Se leyeron las tablas desde la base de datos original filtrando solo los años **2016 a 2019**.\n"
+            "- Se implementó una tabla temporal para reorganizar secuencialmente a los participantes restantes.\n"
+            "- Se verificó que todas las tablas tuvieran exactamente los mismos **2,958 participantes**.")
+    
+        st.success("**Resultado:** Integridad referencial garantizada y consistencia estructural asegurada.")
+    
+        st.warning(
+            "**¿Por qué se eliminó 2014?** Se excluyó debido a la alta proporción de valores nulos "
+            "y a la ausencia de preguntas clave en el cuestionario original, lo que impedía realizar "
+            "un estudio comparativo fiable.")
+
+    with tab2:
+        st.markdown("### Estandarización de variables sociodemográficas")
+
+        with st.container(border=True):
+            st.markdown("**País y Estado**")
+            st.markdown(
+                "Se unificaron las etiquetas *'United States'* y *'United States of America'*. "
+                "El código `-1` (valor nulo) se convirtió en dato faltante real y se validó la coherencia entre estado y país.")
         
-    st.error(
-        "**Variable Raza descartada:** Se decidió prescindir de esta variable por múltiples "
-        "limitaciones metodológicas: solo se preguntó de 2017 a 2019 (excluyendo a la muestra principal de 2016), "
-        "hubo alta abstención, muy poca variabilidad en las respuestas y no forma parte de los objetivos de la investigación."
-    )
-
-with tab3:
-    st.markdown("### Creación de la variable `nivel_jerarquico`")
-    st.markdown("Se creó la columna con las categorías a partir de las siguientes reglas de asignación:")
-    
-    st.table({
-        "Nivel Asignado": ["Directivo", "Coordinación", "Operativo", "Excluir"],
-        "Puestos Originales": [
-            "Executive Leadership", 
-            "Supervisor/Team Lead y One-person shop", 
-            "Back-end, Front-end, DevOps, Designer, Support, Dev Evangelist", 
-            "Other, Sales y HR"
-        ]
-    })
-    
-    st.warning(
-        "**El problema de 2016 (Multiselección):** En 2016, la pregunta permitía marcar varias opciones. "
-        "La base normalizada conservaba solo un puesto (a veces el de menor jerarquía), alterando la "
-        "clasificación de 204 personas (ej. alguien que marcaba 'Executive Leadership' y 'Support' quedaba como Support)."
-    )
-    
-    st.info(
-        "**La solución:** Se implementó una ruta de lectura directa a la base original (`ruta_raw`). "
-        "El script calculó el nivel jerárquico más alto según los puestos marcados (Directivo > Coordinación > Operativo). "
-        "Las categorías excluidas solo se consideraron si no se marcó ninguna otra opción."
-    )
-
-with tab4:
-    st.markdown("### Tratamiento de variables de salud mental")
-    st.markdown(
-        "- **Impacto profesional:** El código `-1` se convirtió en dato faltante y se restauró la columna `consecuencias_negativas`.\n"
-        "- **Diagnóstico:** Se unificaron 11 diagnósticos que estaban duplicados (ej. distintas formas de escribir autismo) "
-        "y se actualizaron las listas asociadas a cada participante."
-    )
-    
-    st.write("")
-    st.markdown("### Tratamiento de la Edad (Filtro y Corrección)")
-    st.markdown(
-        "Se detectaron valores absurdos (personas trabajando a los 5 años, 0 años, o 323 años). "
-        "Dado que esto no está permitido en ningún país, se aplicó el siguiente filtro:"
-    )
-    st.success(
-        "**Solución aplicada:** Se filtraron las edades válidas entre **18 y 75 años**. "
-        "Las edades fuera de rango o mal contestadas **NO se eliminaron**; en su lugar, "
-        "fueron reemplazadas por la **media ponderada** para obtener un valor estimado y conservar al participante."
-    )
-
-with tab5:
-    st.markdown("### Manejo de valores nulos y columnas descartadas")
-    
-    with st.container(border=True):
-        st.markdown("**Etiquetas 'Not applicable'**")
-        st.markdown(
-            "En las variables `categoria_laboral` y `cobertura_incluye_sm` se incorporó la etiqueta "
-            "*'not applicable'* (en lugar de null) para evitar el rechazo de personas y conservar el volumen de registros."
-        )
+        with st.container(border=True):
+            st.markdown("**Género**")
+            st.markdown(
+                "Se agruparon los 101 textos originales en tres macrocategorías: "
+                "**Femenino, Masculino y Otro**. Las respuestas sin sentido se marcaron como faltantes.")
         
-    with st.container(border=True):
-        st.markdown("**Columna `compania_estech` descartada**")
+        st.error(
+            "**Variable Raza descartada:** Se decidió prescindir de esta variable por múltiples "
+            "limitaciones metodológicas: solo se preguntó de 2017 a 2019 (excluyendo a la muestra principal de 2016), "
+            "hubo alta abstención, muy poca variabilidad en las respuestas y no forma parte de los objetivos de la investigación.")
+
+    with tab3:
+        st.markdown("### Creación de la variable `nivel_jerarquico`")
+        st.markdown("Se creó la columna con las categorías a partir de las siguientes reglas de asignación:")
+    
+        st.table({
+            "Nivel Asignado": ["Directivo", "Coordinación", "Operativo", "Excluir"],
+            "Puestos Originales": ["Executive Leadership", "Supervisor/Team Lead y One-person shop", "Back-end, Front-end, DevOps, Designer, Support, Dev Evangelist", 
+            "Other, Sales y HR"]})
+    
+        st.warning(
+            "**El problema de 2016 (Multiselección):** En 2016, la pregunta permitía marcar varias opciones. "
+            "La base normalizada conservaba solo un puesto (a veces el de menor jerarquía), alterando la "
+            "clasificación de 204 personas (ej. alguien que marcaba 'Executive Leadership' y 'Support' quedaba como Support).")
+    
+        st.info(
+            "**La solución:** Se implementó una ruta de lectura directa a la base original (`ruta_raw`). "
+            "El script calculó el nivel jerárquico más alto según los puestos marcados (Directivo > Coordinación > Operativo). "
+            "Las categorías excluidas solo se consideraron si no se marcó ninguna otra opción.")
+
+    with tab4:
+        st.markdown("### Tratamiento de variables de salud mental")
         st.markdown(
-            "Se eliminó por redundancia y ambigüedad. La validación evidenció que sus datos eran 100% idénticos "
-            "a los de `primer_trabajo` (preguntaba por el empleador anterior de 2017-2019, no el actual). "
-            "Además, la clasificación del tipo de empresa no resulta relevante para los objetivos del análisis."
-        )
+            "- **Impacto profesional:** El código `-1` se convirtió en dato faltante y se restauró la columna `consecuencias_negativas`.\n"
+            "- **Diagnóstico:** Se unificaron 11 diagnósticos que estaban duplicados (ej. distintas formas de escribir autismo) "
+            "y se actualizaron las listas asociadas a cada participante.")
+    
+        st.write("")
+        st.markdown("### Tratamiento de la Edad (Filtro y Corrección)")
+        st.markdown(
+            "Se detectaron valores absurdos (personas trabajando a los 5 años, 0 años, o 323 años). "
+            "Dado que esto no está permitido en ningún país, se aplicó el siguiente filtro:")
+        
+        st.success(
+            "**Solución aplicada:** Se filtraron las edades válidas entre **18 y 75 años**. "
+            "Las edades fuera de rango o mal contestadas **NO se eliminaron**; en su lugar, "
+            "fueron reemplazadas por la **media ponderada** para obtener un valor estimado y conservar al participante.")
+
+    with tab5:
+        st.markdown("### Manejo de valores nulos y columnas descartadas")
+    
+        with st.container(border=True):
+            st.markdown("**Etiquetas 'Not applicable'**")
+            st.markdown(
+                "En las variables `categoria_laboral` y `cobertura_incluye_sm` se incorporó la etiqueta "
+                "*'not applicable'* (en lugar de null) para evitar el rechazo de personas y conservar el volumen de registros."
+            )
+            
+        with st.container(border=True):
+            st.markdown("**Columna `compania_estech` descartada**")
+            st.markdown(
+                "Se eliminó por redundancia y ambigüedad. La validación evidenció que sus datos eran 100% idénticos "
+                "a los de `primer_trabajo` (preguntaba por el empleador anterior de 2017-2019, no el actual). "
+                "Además, la clasificación del tipo de empresa no resulta relevante para los objetivos del análisis."
+            )
 
 st.divider()
 

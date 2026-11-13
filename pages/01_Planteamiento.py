@@ -139,7 +139,7 @@ if st.session_state.seccion == "🔍 Planteamiento":
         "no se ha establecido empíricamente si la percepción de perjuicio varía según la "
         "combinación de ambos factores.",
     ]
-    with st.container(key="lectura"):
+    with st.container(height=400, key="lectura"):
         for p in parrafos:
             st.markdown(p)
 # objetivos
