@@ -13,10 +13,11 @@ marco_teorico = st.Page("pages/02_Marco_Teorico.py",      title="Marco Teórico"
 marco_metodo  = st.Page("pages/03_Marco_Metodologico.py", title="Marco Metodológico", icon="🧪")
 resultados    = st.Page("pages/04_Resultados.py",         title="Resultados",         icon="📊")
 cuestionario  = st.Page("pages/05_Cuestionario_SQL.py",   title="Cuestionario SQL",   icon="🗄️")
-bibliografia  = st.Page("pages/06_Bibliografia.py",       title="Bibliografía",       icon="🔗")
+conclusiones  = st.Page("pages/06_Conclusiones.py",       title="Conclusiones",       icon="✅")
+bibliografia  = st.Page("pages/07_Bibliografia.py",       title="Bibliografía",       icon="🔗")
 
 pg = st.navigation(
-    [inicio, planteamiento, marco_teorico, marco_metodo, resultados, cuestionario, bibliografia],
+    [inicio, planteamiento, marco_teorico, marco_metodo, resultados, cuestionario, conclusiones, bibliografia],
     position="hidden",
 )
 
@@ -42,13 +43,14 @@ with st.sidebar:
     st.caption("**ANÁLISIS**")
     boton(resultados, 4)
     boton(cuestionario, 5)
+    boton(conclusiones, 6)
 
     st.write("")
     with st.expander("📎 Referencias y equipo", expanded=False):
-        boton(bibliografia, 6)
+        boton(bibliografia, 7)
         st.write("")
         st.markdown("**👥 Equipo**")
-        for n in ["Nicole Altera", "Danmara Dos Ramos", "Arianna Oliveros",
+        for n in ["Nicole Altera", "Danmara Dos Ramos",
                 "Camila Santiago", "Sebastian Soto"]:
             st.write(n)
 
