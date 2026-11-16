@@ -45,8 +45,6 @@ Aplicativo en Streamlit     Consultas SQL Avanzadas
 
 ### ¿Por qué este conjunto de herramientas?
 
-### ¿Por qué este conjunto de herramientas?
-
 | Herramienta | Papel en el proyecto | Razón de la elección |
 | :--- | :--- | :--- |
 | **Python + Pandas** | Limpieza y transformación de datos | Manejo eficiente de datos nulos y normalización de variables. |
@@ -72,13 +70,42 @@ A partir de estas bases, la información útil se organizó en entidades categó
 
 ## Guía de instalación y uso:
 
-En proceso
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com
+cd Grupo-4-Puesto-Trabajo-y-Salud-Mental-en-IT
+```
+
+### 2. Instalar dependencias
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Configurar las credenciales (Secrets)
+
+Crea una carpeta llamada `.streamlit` en la raíz del proyecto y dentro un archivo `secrets.toml` con las credenciales de MotherDuck y Supabase (usa el archivo `.env.ejemplo` como guía).
+
+```toml
+MOTHERDUCK_TOKEN = "tu_token_de_motherduck"
+
+[connections.supabase]
+SUPABASE_DB_URL = "postgresql+psycopg2://postgres:tu_contraseña@db.tu_proyecto.supabase.co:5432/postgres"
+```
+
+### 4. Ejecutar el aplicativo
+
+```bash
+streamlit run app.py
+```
 
 ---
 
 ## 📁 Estructura del Repositorio
 
-```
+```text
+
 ├── app.py                    # Código principal de la App de Streamlit
 ├── requirements.txt          # Librerias de Python
 ├── README.md.                # Documentación del repositorio
@@ -93,33 +120,13 @@ En proceso
 │   └── 06_Bibliografia.py          # Referencias bibliográficas
 │
 ```
---- 
+
+---
+
 ## 🔍 Equipo de investigación
+
 - **Nicole Altera**
 - **Danmara Dos Ramos**
 - **Arianna Oliveros**
 - **Camila Santiago**
 - **Sebastian Soto**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
