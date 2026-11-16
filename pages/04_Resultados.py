@@ -111,11 +111,11 @@ if st.session_state.seccion_resultados == "Resultados Generales":
         fig_p_jer.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
         st.plotly_chart(fig_p_jer, use_container_width=True)
 
-        with st.popover("❓ ¿Qué significa esto?"):
+        with st.popover(" Interpretación"):
             st.markdown("""
             **Percepción por Jerarquía:**
             *   Los promedios de percepción de perjuicio son muy similares entre los tres niveles (rondando el 2.1 en la escala).
-            *   **Interpretación:** Visualmente, no se observan diferencias drásticas, lo que anticipa que el ANOVA podría no encontrar diferencias significativas si la varianza es alta.
+            *   **Interpretación:** Visualmente, no se observan diferencias drásticas, lo que anticipa que el ANOVA podría encontrar diferencias sutiles, pero no una brecha gigante entre un operativo y un directivo.
             """)
 
     with col_g2:
@@ -128,11 +128,11 @@ if st.session_state.seccion_resultados == "Resultados Generales":
         fig_p_edad.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
         st.plotly_chart(fig_p_edad, use_container_width=True)
 
-        with st.popover("❓ ¿Qué significa esto?"):
+        with st.popover("Interpretación"):
             st.markdown("""
             **Tendencia por Edad:**
             *   Se observa cómo varía el promedio de percepción a lo largo de los distintos rangos etarios.
-            *   **Interpretación:** Si la línea sube o baja abruptamente, indica que los grupos generacionales (ej. jóvenes vs mayores) experimentan el estigma de manera diferente en el sector tech.
+            *   **Interpretación:** Los más jóvenes (18-24) y los mayores (55+) parecen tener percepciones ligeramente distintas al resto. La línea nos ayuda a ver si el estigma es un problema generacional o transversal.
             """)
 
 elif st.session_state.seccion_resultados == "Análisis ANOVA":
@@ -150,14 +150,15 @@ elif st.session_state.seccion_resultados == "Análisis ANOVA":
     )
     fig_obj3.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
     st.plotly_chart(fig_obj3, use_container_width=True)
-
-    with st.popover("❓ ¿Qué significa esto?"):
+    
+    with st.popover("❓ Interpretación detallada"):
         st.markdown("""
-        **Gráfico de Interacción (Edad vs Jerarquía):**
-        *   Este gráfico muestra el comportamiento de las tres jerarquías a través de las edades.
-        *   **Interpretación:** Si las líneas se mantienen paralelas, la edad afecta por igual a todos. Si se cruzan o van en direcciones opuestas, significa que el efecto de envejecer es distinto dependiendo del puesto de trabajo (Interacción).
+        **Análisis de la relación Edad-Jerarquía:**
+        *   **Coordinación:** Mantiene una percepción estable (≈2.1) entre los 18 y 54 años. Sin embargo, a partir de los 55 años, la percepción aumenta (superando las 2.2 unidades). Esto podría deberse a la preocupación por la cercanía a la tercera edad y el temor a ser menos productivos.
+        *   **Directivo:** Se concentra mayormente desde los 35-44 años en adelante. Alcanza los valores máximos del gráfico (por encima de 2.3). Se infiere que esto ocurre porque los trabajadores adquieren experiencia, portafolio y con ello asumen nuevas oportunidades.
+        *   **Operativo:** Mantiene una línea bastante plana y estable a lo largo de todos los rangos etarios, sin picos abruptos.
         """)
-
+        
     st.markdown("---")
     
     # Obj 4
@@ -179,8 +180,8 @@ elif st.session_state.seccion_resultados == "Análisis ANOVA":
     
         grupos = [g['nivel_percepcion_perjuicio'] for _, g in df_anova.groupby('nivel_jerarquico')]
         stat_l, p_l = stats.levene(*grupos)
-    
-        st.metric("P-value (Levene)", f"{p_l:.4f}")
+        p_l_coma = f"{p_l:.4f}".replace(".", ",")    
+        st.metric("P-value (Levene)", p_l_coma)
     
         if p_l > 0.05:
             st.success("H0 no rechazada. Se asume homogeneidad de varianzas.")
@@ -205,7 +206,9 @@ elif st.session_state.seccion_resultados == "Análisis ANOVA":
         st.markdown("Prueba de Shapiro-Wilk (H0: Los residuos son normales).")
 
         stat_s, p_s = stats.shapiro(modelo.resid)
-        st.metric("P-value (Shapiro-Wilk)", f"{p_s:.4f}")
+        
+        p_s_coma = f"{p_s:.4f}".replace(".", ",")        
+        st.metric("P-value (Shapiro-Wilk)", p_s_coma)
 
         if p_s > 0.05:
             st.success("H0 no rechazada. Los residuos son normales.")
@@ -287,29 +290,60 @@ elif st.session_state.seccion_resultados == "Análisis ANOVA":
     st.write("")
 
     st.dataframe(
-        tabla_anova.style.format({'Suma de Cuadrados': '{:.4f}', 'Grados de Libertad': '{:.0f}', 'Estadístico F': '{:.4f}', 
-                                'Valor p (Significancia)': '{:.4f}'}), use_container_width=True)
-
+        tabla_anova.style.format({
+            'Suma de Cuadrados': lambda x: f"{x:.4f}".replace(".", ","), 
+            'Grados de Libertad': '{:.0f}', 
+            'Estadístico F': lambda x: f"{x:.4f}".replace(".", ","), 
+            'Valor p (Significancia)': lambda x: f"{x:.4f}".replace(".", ",")
+        }), use_container_width=True)
     st.write("")
-    st.markdown("---")
+
     st.subheader("Conclusiones del Modelo")
     
     col_c1, col_c2, col_c3 = st.columns(3)
     
     with col_c1:
+        p_jer_str = f"{p_jer:.4f}".replace(".", ",")
+        f_jer_str = f"{tabla_anova.loc['Nivel Jerárquico', 'Estadístico F']:.4f}".replace(".", ",")
         if p_jer < 0.05:
-            st.success(f"**Nivel Jerárquico**\n\n Sí hay diferencia significativa (p = {p_jer:.4f}). El puesto de trabajo influye en cómo se percibe el estigma.")
+            st.success(f"""
+            **Nivel Jerárquico** (p = {p_jer_str})
+            *   **Grados de libertad:** 2
+            *   **F de Fisher:** {f_jer_str}
+            
+            **Conclusión:** Rechazamos la Hipótesis Nula. El nivel jerárquico **sí influye** en la percepción del estigma. Existe al menos una media poblacional (operativo, coordinación o directivo) que es diferente a las demás.
+            """)
         else:
-            st.info(f"**Nivel Jerárquico**\n\n No hay diferencia significativa (p = {p_jer:.4f}). El puesto de trabajo no influye por sí solo.")
+            st.info(f"**Nivel Jerárquico:** No hay diferencia significativa (p = {p_jer_str}).")
 
     with col_c2:
+        p_edad_str = f"{p_edad:.4f}".replace(".", ",")
+        f_edad_str = f"{tabla_anova.loc['Grupo de Edad', 'Estadístico F']:.4f}".replace(".", ",")
         if p_edad < 0.05:
-            st.success(f"**Grupo de Edad**\n\n Sí hay diferencia significativa (p = {p_edad:.4f}). La generación del trabajador influye en su percepción.")
+            st.success(f"""
+            **Grupo de Edad** (p = {p_edad_str})
+            *   **Grados de libertad:** 4
+            *   **F de Fisher:** {f_edad_str}
+            **Conclusión:** Rechazamos la Hipótesis Nula. Al menos un grupo etario tiene una media diferente.
+            """)
         else:
-            st.info(f"**Grupo de Edad**\n\n No hay diferencia significativa (p = {p_edad:.4f}). La edad no es un factor determinante.")
+            st.info(f"""
+            **Grupo de Edad** (p = {p_edad_str})
+            *   **Grados de libertad:** 4
+            *   **F de Fisher:** {f_edad_str}
+            **Conclusión:** Aceptamos la Hipótesis Nula. Estadísticamente **no hay diferencias marcadas** asociadas a la edad de los consultados.
+            """)
 
     with col_c3:
+        p_inter_str = f"{p_inter:.4f}".replace(".", ",")
+        f_inter_str = f"{tabla_anova.loc['Interacción (Jerarquía * Edad)', 'Estadístico F']:.4f}".replace(".", ",")
         if p_inter < 0.05:
-            st.success(f"**Interacción (Jerarquía * Edad)**\n\n Hay interacción (p = {p_inter:.4f}). El efecto de la edad cambia dependiendo de tu puesto de trabajo.")
+            st.success(f"**Interacción:** Significativa (p = {p_inter_str}).")
         else:
-            st.info(f"**Interacción (Jerarquía * Edad)**\n\n No hay interacción (p = {p_inter:.4f}). Jerarquía y edad actúan de forma independiente.")
+            st.info(f"""
+            **Interacción (Jerarquía * Edad)** (p = {p_inter_str})
+            *   **Grados de libertad:** 8
+            *   **F de Fisher:** {f_inter_str}
+            
+            **Conclusión:** Aceptamos la Hipótesis Nula. Ambos factores son **independientes**. Las consecuencias negativas de las enfermedades mentales en el sector IT no distinguen sus efectos por niveles jerárquicos o edades.
+            """) 
