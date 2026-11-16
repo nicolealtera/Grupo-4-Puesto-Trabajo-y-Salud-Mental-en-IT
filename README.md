@@ -25,11 +25,36 @@ Investigación de nivel descriptivo-correlacional, con diseño no experimental, 
 
 ## 🛠️ Arquitectura del Proyecto
 
-En proceso
+```text
+Kaggle: OSMI Mental Health in Tech Survey (Datos crudos en formato EAV)
+│
+▼
+[Limpieza y Normalización] → Python + Pandas + DBeaver
+│  (Unificación de esquemas, tratamiento de nulos, creación de variables)
+▼
+Base de Datos Normalizada (3FN) → SQLite / Supabase (PostgreSQL)
+│  (Modelo en estrella: Tablas de hechos y dimensiones)
+▼
+[Exportación / Conexión] → DuckDB / SQLAlchemy
+│
+┌─────────────┴─────────────┐
+▼                           ▼
+Aplicativo en Streamlit     Consultas SQL Avanzadas
+(Análisis interactivo)      (Evaluación de SQL con Supabase)
+```
 
 ### ¿Por qué este conjunto de herramientas?
 
-En proceso
+### ¿Por qué este conjunto de herramientas?
+
+| Herramienta | Papel en el proyecto | Razón de la elección |
+| :--- | :--- | :--- |
+| **Python + Pandas** | Limpieza y transformación de datos | Manejo eficiente de datos nulos y normalización de variables. |
+| **DBeaver / SQLite** | Modelado y normalización relacional | Permite construir y verificar el esquema en 3FN antes de subirlo a la nube. |
+| **Supabase** | Base de datos en la nube (PostgreSQL) | Alojamiento de la base normalizada, acceso remoto y soporte para SQL avanzado. |
+| **SQLAlchemy** | Conexión desde Python a Supabase | Permite ejecutar consultas SQL puras y manejar la conexión de forma segura. |
+| **DuckDB** | Motor analítico para el dashboard | Procesamiento rápido de datos locales y consultas a archivos Parquet. |
+| **Streamlit** | Interfaz del aplicativo | Publica el análisis completo (marco teórico, resultados, ANOVA y editor SQL) en una web interactiva. |
 
 ### Base de datos
 
