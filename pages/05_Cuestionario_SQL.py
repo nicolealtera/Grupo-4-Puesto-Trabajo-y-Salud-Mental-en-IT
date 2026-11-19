@@ -11,7 +11,9 @@ def get_db_engine():
         DB_URL = st.secrets["connections"]["supabase"]["SUPABASE_DB_URL"]
         return create_engine(DB_URL, pool_pre_ping=True)
     except Exception as e:
+        st.error(f"Error exacto de conexión: {e}")
         return None
+    
 
 engine = get_db_engine()
 
@@ -33,7 +35,7 @@ with tab1:
     st.markdown("---")
 
     query_1 = """
-SELECT * FROM answer LIMIT 5;
+SELECT * FROM answer LIMIT 5
 """
     
     sql_input_1 = st.text_area("Escribe tu primera consulta:", value=query_1, height=250, key="sql_1")
@@ -119,7 +121,82 @@ with tab4:
     st.markdown("---")
 
     query_6 = """
-SELECT * FROM answer LIMIT 5;
+WITH preguntas_abiertas AS (
+    SELECT q.questionid, q.questiontext
+    FROM question q
+    WHERE q.questiontext LIKE 'Describe%' OR
+          q.questiontext LIKE 'Briefly Describe%' OR
+          q.questiontext LIKE 'If there is anything else you would like to tell us%' OR
+          q.questiontext LIKE 'Any additional notes or comments%'
+),
+respuestas AS (
+    SELECT
+        a."QuestionID",
+        a."SurveyID",
+        LOWER(REGEXP_REPLACE(a."AnswerText", '^[[:space:][:punct:]]+|[[:space:][:punct:]]+$', '', 'g')) AS respuesta
+    FROM preguntas_abiertas p
+    JOIN answer a ON a."QuestionID" = p.questionid
+),
+clasificacion AS (
+    SELECT r.*,
+        CASE WHEN LENGTH(r.respuesta) < 3
+               OR r.respuesta !~ '[a-zA-Z]'
+               OR r.respuesta !~ '[aeiouáéíóúAEIOUÁÉÍÓÚ]'
+             THEN 'desechable'
+             ELSE 'sustantiva' END AS clasificacion
+    FROM respuestas r
+),
+ordenamiento AS (
+    SELECT
+        c."SurveyID",
+        c."QuestionID",
+        LENGTH(c.respuesta) AS longitud,
+        ROW_NUMBER() OVER (PARTITION BY c."SurveyID", c."QuestionID" ORDER BY LENGTH(c.respuesta)) AS orden,
+        COUNT(*) OVER (PARTITION BY c."SurveyID", c."QuestionID") AS n
+    FROM clasificacion c
+    WHERE c.clasificacion = 'sustantiva'
+),
+mediana AS (
+    SELECT
+        o."SurveyID",
+        o."QuestionID",
+        AVG(o.longitud) AS mediana_longitud
+    FROM ordenamiento o
+    WHERE o.orden IN ((o.n + 1) / 2, (o.n + 2) / 2)
+    GROUP BY o."SurveyID", o."QuestionID"
+),
+todo AS (
+    SELECT
+        c."SurveyID",
+        c."QuestionID",
+        COUNT(*) AS respuestas,
+        SUM(CASE WHEN c.clasificacion = 'sustantiva' THEN 1 ELSE 0 END) AS sustantivas,
+        SUM(CASE WHEN c.clasificacion = 'desechable' THEN 1 ELSE 0 END) AS desechables,
+        ROUND(1.0 * SUM(CASE WHEN c.clasificacion = 'sustantiva' THEN 1 ELSE 0 END) / COUNT(*), 4) AS prop_sustantivas,
+        ROUND(m.mediana_longitud, 2) AS mediana_longitud_sustantivas
+    FROM clasificacion c
+    LEFT JOIN mediana m ON m."SurveyID" = c."SurveyID" AND m."QuestionID" = c."QuestionID"
+    GROUP BY c."SurveyID", c."QuestionID", m.mediana_longitud
+),
+deciles AS (
+    SELECT t.*,
+        NTILE(10) OVER (PARTITION BY t."SurveyID" ORDER BY t.prop_sustantivas, t."QuestionID") AS decil
+    FROM todo t
+)
+SELECT
+    d."SurveyID",
+    d."QuestionID",
+    pa.questiontext,
+    d.respuestas,
+    d.sustantivas,
+    d.desechables,
+    d.prop_sustantivas,
+    d.mediana_longitud_sustantivas,
+    d.decil
+FROM deciles d
+JOIN preguntas_abiertas pa ON pa.questionid = d."QuestionID"
+WHERE d.respuestas >= 50
+ORDER BY d."SurveyID", d.decil DESC, d.prop_sustantivas DESC
 """
     
     sql_input_6 = st.text_area("Escribe tu cuarta consulta:", value=query_6, height=250, key="sql_6")
