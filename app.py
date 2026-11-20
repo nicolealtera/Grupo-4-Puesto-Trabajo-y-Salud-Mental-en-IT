@@ -52,7 +52,21 @@ with st.sidebar:
             st.write(n)
 
 load_dotenv()
+def get_conn():
+    try:
+        token = st.secrets["MOTHERDUCK_TOKEN"]
+    except (FileNotFoundError, KeyError):
+        token = os.getenv("MOTHERDUCK_TOKEN") or os.getenv("motherduck_token")
 
-token = os.getenv("motherduck_token")
+    if token:
+        return duckdb.connect("md:puesto_trabajo_y_salud_mental", config={"motherduck_token": token})
+    else:
+        return duckdb.connect("md:puesto_trabajo_y_salud_men tal")
 
-conn = duckdb.connect("md:puesto de trabajo y salud mental")
+try:
+    st.session_state["conn"] = get_conn()
+except Exception as e:
+    st.session_state["conn"] = None
+    st.sidebar.error(f"Sin conexión a la base de datos: {e}")
+
+pg.run()
