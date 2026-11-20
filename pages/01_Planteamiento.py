@@ -205,8 +205,8 @@ elif st.session_state.seccion == "💡 Justificación":
         "la Salud (OMS) y la Organización Internacional del Trabajo (OIT) de proteger la "
         "salud mental en el trabajo. Al utilizar datos abiertos de la encuesta Open "
         "Sourcing Mental Illness (OSMI), la investigación visibiliza las desigualdades "
-        "internas de [COMPLETAR: p. ej. las organizaciones del sector tecnológico, "
-        "desnaturaliza el estigma y aporta evidencia sobre justicia organizacional].",
+        "internas de las organizaciones del sector tecnológico,desnaturaliza el estigma y "
+        "aporta evidencia sobre justicia organizacional]."
     ]
 
     with st.container(key="lectura"):

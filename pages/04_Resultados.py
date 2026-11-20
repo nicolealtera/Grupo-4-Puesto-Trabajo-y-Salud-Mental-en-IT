@@ -20,16 +20,17 @@ def cargar_datos(conexion):
     df = conexion.execute(query).df()
     
     df = df.rename(columns={
-        'generotexto': 'genero',
-        'paistexto': 'pais',
-        'escala_perjuicio': 'nivel_percepcion_perjuicio',
-        'grupo_edad': 'Grupo_Edad'
+        'gender': 'genero',
+        'country_name': 'pais',
+        'damage_scale': 'nivel_percepcion_perjuicio',
+        'age_group': 'Grupo_Edad',
+        'hierarchical_level': 'nivel_jerarquico'
     })
     return df
 
 try:
     df = cargar_datos(conn)
-    df_2016 = df[(df['encuestaID'] == 2016) & (df['nivel_percepcion_perjuicio'].notna())].copy()
+    df_2016 = df[(df['surveyID'] == 2016) & (df['nivel_percepcion_perjuicio'].notna())].copy()
 
 except Exception as e:
     st.error(f"Error al consultar la base de datos: {e}")
