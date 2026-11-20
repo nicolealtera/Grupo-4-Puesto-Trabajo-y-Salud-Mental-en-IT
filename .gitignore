@@ -7,6 +7,7 @@ env/
 *.sqlite3
 # Python
 __pycache__/
+.streamlit/secrets.toml
 #ignora los archivos de entorno
 .env
 *.env
@@ -14,3 +15,4 @@ __pycache__/
 #ignora archivos de powerbi
 **/.pbi/localSettings.json
 **/.pbi/cache.abf
+
