@@ -2,6 +2,8 @@
 
 ![Puesto de Trabajo y su Relación con la Salud Mental en el Ámbito Tecnológico: Un Análisis Estadístico del Impacto en el Desarrollo Profesional](assets/banner.png)
 
+### Links: [Dashboard](https://salud-mental-it.streamlit.app/) y [PowerBI](https://app.powerbi.com/view?r=eyJrIjoiODZjN2ExYzctMDg4Mi00ZWEzLThmZmUtNmRkYWI4ODVkNjI0IiwidCI6IjRjODE4Zjc5LWFiODQtNDU1Mi05YjdjLTJmZTcxNWIwZDBkNSIsImMiOjR9&pageName=9aa73316d8030f5acd6c)
+
 ## Descripción del Proyecto
 
 Este proyecto analiza cómo difieren las percepciones de perjuicio profesional por motivos de salud mental según el nivel jerárquico del puesto de trabajo y el grupo de edad en trabajadores del sector tecnológico, utilizando datos de la encuesta OSMI Mental Health in Tech Survey. El estudio emplea un ANOVA factorial de dos vías con interacción como técnica inferencial principal, complementado con análisis descriptivo y visualización de datos para explorar las diferencias entre los grupos e identificar los segmentos más vulnerables.
@@ -25,68 +27,137 @@ Investigación de nivel descriptivo-correlacional, con diseño no experimental, 
 
 ## 🛠️ Arquitectura del Proyecto
 
-En proceso
+```text
+Kaggle: OSMI Mental Health in Tech Survey (Datos crudos en formato EAV)
+│
+▼
+[Limpieza y Normalización] → Python + Pandas + DBeaver
+│  (Unificación de esquemas, tratamiento de nulos, creación de variables)
+▼
+Base de Datos Normalizada (3FN) → SQLite / Supabase (PostgreSQL)
+│  (Modelo en estrella: Tablas de hechos y dimensiones)
+▼
+[Exportación / Conexión] → DuckDB / SQLAlchemy
+│
+┌─────────────┴─────────────┐
+▼                           ▼
+Aplicativo en Streamlit     Consultas SQL Avanzadas
+(Análisis interactivo)      (Evaluación de SQL con Supabase)
+```
 
 ### ¿Por qué este conjunto de herramientas?
 
-En proceso
+| Herramienta | Papel en el proyecto | Razón de la elección |
+| :--- | :--- | :--- |
+| **Python + Pandas** | Limpieza y transformación de datos | Manejo eficiente de datos nulos y normalización de variables. |
+| **DBeaver / SQLite** | Modelado y normalización relacional | Permite construir y verificar el esquema en 3FN antes de subirlo a la nube. |
+| **Supabase** | Base de datos en la nube (PostgreSQL) | Alojamiento de la base normalizada, acceso remoto y soporte para SQL avanzado. |
+| **SQLAlchemy** | Conexión desde Python a Supabase | Permite ejecutar consultas SQL puras y manejar la conexión de forma segura. |
+| **DuckDB** | Motor analítico para el dashboard | Procesamiento rápido de datos locales y consultas a archivos Parquet. |
+| **Streamlit** | Interfaz del aplicativo | Publica el análisis completo (marco teórico, resultados, ANOVA y editor SQL) en una web interactiva. |
 
 ### Base de datos
 
 ### 📌 [**Mental Health in the Tech Industry**](https://www.kaggle.com/datasets/anth7310/mental-health-in-the-tech-industry)
 
+### Fase de normalización
+
+El sistema original utilizaba un esquema EAV (Entidad-Atributo-Valor) que, aunque flexible para recolectar datos dispersos, presentaba problemas de rendimiento y carecía de integridad de tipos, por lo que se rediseñó la información hacia un modelo relacional normalizado en Tercera Forma Normal (3FN). Para lograrlo, se filtraron únicamente las variables clave de la investigación y se establecieron dos entidades principales independientes (Participantes y Encuestas) que eliminan las dependencias parciales de la 2FN y sirven de anclaje para todo el sistema.
+
+A partir de estas bases, la información útil se organizó en entidades categóricas dependientes que agrupan los datos por dominios temáticos —como situación laboral, estado mental, impacto profesional, apoyo corporativo y prejuicios— vinculados de forma uno a uno con los participantes y uno a muchos con las encuestas. Asimismo, se separaron las dependencias transitivas en catálogos independientes de referencia para los puestos, géneros, países y estados, logrando una estructura consistente, sin duplicidades y altamente optimizada para consultas analíticas.
+
+![Visualización](./assets/DER_normalizacion.png)
+
 ---
 
 ## Guía de instalación y uso:
 
-En proceso
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com
+cd Grupo-4-Puesto-Trabajo-y-Salud-Mental-en-IT
+```
+
+### 2. Instalar dependencias
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Configurar las credenciales (Secrets)
+
+Crea una carpeta llamada `.streamlit` en la raíz del proyecto y dentro un archivo `secrets.toml` con las credenciales de MotherDuck y Supabase (usa el archivo `.env.ejemplo` como guía).
+
+```toml
+MOTHERDUCK_TOKEN = "tu_token_de_motherduck"
+
+[connections.supabase]
+SUPABASE_DB_URL = "postgresql+psycopg2://postgres:tu_contraseña@db.tu_proyecto.supabase.co:5432/postgres"
+```
+
+### 4. Ejecutar el aplicativo
+
+```bash
+streamlit run app.py
+```
 
 ---
 
 ## 📁 Estructura del Repositorio
 
-```
-├── app.py                    # Código principal de la App de Streamlit
-├── requirements.txt          # Librerias de Python
-├── README.md.                # Documentación del repositorio
+```text
+
+├── app.py                                  # Código principal de la App de Streamlit
+├── requirements.txt                        # Librerías de Python
+├── README.md                               # Documentación del repositorio
+├── .env.ejemplo                            # Plantilla de variables de entorno
+├── .gitignore                              # Archivos excluidos del repositorio
+├── evaluacion_sql_salud_mental_tec...      # Evaluación SQL del proyecto
 ├── .streamlit
-│   └──config.toml            # Tema visual de la app
-│ 
+│   └── config.toml                         # Tema visual de la app
 ├── pages/
-│   ├── 01_Inicio.py                # Página de inicio
-│   ├── 02_Marco_Metodologico.py    # Operacionalización y metodología
-│   ├── 03_Marco_Teorico.py         # Fundamentos conceptuales
-│   ├── 05_Conclusiones.py          # Hallazgos y recomendaciones
-│   └── 06_Bibliografia.py          # Referencias bibliográficas
-│
+│   ├── 00_Inicio.py                        # Página de inicio
+│   ├── 01_Planteamiento.py                 # Problema, objetivos y justificación
+│   ├── 02_Marco_Teorico.py                 # Fundamentos conceptuales
+│   ├── 03_Marco_Metodologico.py            # Operacionalización y metodología
+│   ├── 04_Resultados.py                    # Resultados del estudio
+│   ├── 05_Cuestionario_SQL.py              # Cuestionario de consultas SQL
+│   └── 06_Conclusiones.py                  # Hallazgos y recomendaciones
+├── base datos/
+│   ├── mental_health.sqlite                # Base de datos SQLite del proyecto
+│   ├── modelado_de_datos.sql               # Desnormalización: modelo estrella
+│   ├── normalización/
+│   │   └── Script.sql                      # Tablas normalizadas (3FN) y carga desde Answer
+│   └── limpieza/
+│       ├── limpieza.py                     # Limpieza y transformación en Python
+│       └── limpieza.sql                    # Limpieza y estandarización en SQL
+├── Dashboard PowerBI/
+│   ├── salud_mental_en_el_trabajo.pbip     # Proyecto de Power BI
+│   ├── salud_mental_en_el_trabajo.Report/  # Reporte (páginas y visuales)
+│   │   ├── definition.pbir
+│   │   └── definition/                     # report.json, pages.json y página del dashboard
+│   └── salud_mental_en_el_trabajo.SemanticModel/  # Modelo semántico
+│       ├── definition.pbism
+│       ├── diagramLayout.json              # Diagrama de relaciones del modelo
+│       └── definition/                     # Tablas, relaciones y medidas
+└── assets/                                 # Imágenes de la app
+    ├── banner.png                          # Encabezado de la app
+    ├── pelusa.gif / pelusa1.png            # Mascota
+    ├── Planteamiento.png, objetivos.png, justificacion.png      # Planteamiento
+    ├── marco teorico.png, metologico.png, der_normalizacion.png # Marcos y modelo de datos
+    ├── resultados.png, resultados del estudio.png               # Resultados
+    ├── Cuestionario.png                    # Cuestionario SQL
+    └── Conclusiones.png, Recomendaciones.png                    # Cierre
+
 ```
---- 
+
+---
+
 ## 🔍 Equipo de investigación
+
 - **Nicole Altera**
 - **Danmara Dos Ramos**
 - **Arianna Oliveros**
 - **Camila Santiago**
 - **Sebastian Soto**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

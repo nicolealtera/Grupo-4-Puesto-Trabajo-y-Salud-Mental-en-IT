@@ -4,3 +4,6 @@ duckdb==1.5.2
 pandas
 plotly
 python-dotenv
+sqlalchemy
+psycopg2-binary
+statsmodels
