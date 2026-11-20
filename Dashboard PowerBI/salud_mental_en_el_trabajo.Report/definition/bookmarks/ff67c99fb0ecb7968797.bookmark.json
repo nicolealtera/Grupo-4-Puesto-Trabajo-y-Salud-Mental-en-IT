@@ -1,0 +1,460 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "panel cerrado",
+  "name": "ff67c99fb0ecb7968797",
+  "options": {
+    "targetVisualNames": [],
+    "suppressData": true,
+    "preserveNewVisualVisibility": true
+  },
+  "explorationState": {
+    "version": "1.15",
+    "activeSection": "e44da7f462c69116e4dd",
+    "sections": {
+      "e44da7f462c69116e4dd": {
+        "visualContainers": {
+          "250deb890d493310992c": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "971cd534713e4e58acd5",
+                  "type": "Categorical",
+                  "expression": {
+                    "HierarchyLevel": {
+                      "Expression": {
+                        "Hierarchy": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "main salud_mental"
+                            }
+                          },
+                          "Hierarchy": "paistexto Jerarquía"
+                        }
+                      },
+                      "Level": "paistexto"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "f2f564e2eb2ce2d33a2d",
+                  "type": "Categorical",
+                  "expression": {
+                    "HierarchyLevel": {
+                      "Expression": {
+                        "Hierarchy": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "main salud_mental"
+                            }
+                          },
+                          "Hierarchy": "paistexto Jerarquía"
+                        }
+                      },
+                      "Level": "Estadotexto"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "9029953f37542766ca59",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "main salud_mental"
+                            }
+                          },
+                          "Property": "participanteID"
+                        }
+                      },
+                      "Function": 5
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "842192f2e67093ea9a8d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "main salud_mental"
+                            }
+                          },
+                          "Property": "escala_perjuicio"
+                        }
+                      },
+                      "Function": 1
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "azureMap",
+              "objects": {},
+              "activeProjections": {
+                "Category": [
+                  {
+                    "HierarchyLevel": {
+                      "Expression": {
+                        "Hierarchy": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "main salud_mental"
+                            }
+                          },
+                          "Hierarchy": "paistexto Jerarquía"
+                        }
+                      },
+                      "Level": "Estadotexto"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "2a13c297cc6860bc3c5d": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "1fa47ca0610497690aa0",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "main salud_mental"
+                            }
+                          },
+                          "Property": "participanteID"
+                        }
+                      },
+                      "Function": 5
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "main salud_mental"
+                            }
+                          },
+                          "Property": "participanteID"
+                        }
+                      },
+                      "Function": 5
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "4ddd96c8b46a82083840": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "e46844888a8e080d2bc0": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "ff9fb4d6ac864870185a": {
+            "singleVisual": {
+              "visualType": "pageNavigator",
+              "objects": {}
+            }
+          },
+          "d5558dd9874447b77ec1": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "3ce4be80e2057be52301": {
+            "singleVisual": {
+              "visualType": "slicer",
+              "autoSelectVisualType": false,
+              "objects": {},
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "ea2d4717e01ca7ce09a4": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "f4248233971d97c70590",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "nivel_jerarquico"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "m",
+                                "Entity": "main salud_mental",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "m"
+                                            }
+                                          },
+                                          "Property": "nivel_jerarquico"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'Coordinación'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "nivel_jerarquico"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "1f6693dae54707584266": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7397ac967b9e442b8086",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "grupo_edad"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        },
+                        "isInvertedSelectionMode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "true"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "grupo_edad"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "e10bf0bb4edc56a7c90a": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7d057e75c86515b22308",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "generotexto"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "generotexto"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "41a65b118005a1b374b4": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          }
+        },
+        "visualContainerGroups": {
+          "90c0a8f982802b9c6d8b": {
+            "isHidden": true
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

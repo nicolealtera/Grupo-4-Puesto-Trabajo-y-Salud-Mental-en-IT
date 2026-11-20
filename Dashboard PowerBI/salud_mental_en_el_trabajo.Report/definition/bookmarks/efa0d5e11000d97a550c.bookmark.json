@@ -1,0 +1,628 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "panel abierto2",
+  "name": "efa0d5e11000d97a550c",
+  "options": {
+    "targetVisualNames": [],
+    "preserveNewVisualVisibility": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "572b3651a90c848a50ec",
+    "sections": {
+      "572b3651a90c848a50ec": {
+        "visualContainers": {
+          "1b2cf14749bcb5b85a0a": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "23249c83d7d7dadd01a6": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "b9736ab6891c014801b5",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "nivel_jerarquico"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "nivel_jerarquico"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "44010e0dc1103a000e0a": {
+            "singleVisual": {
+              "visualType": "pageNavigator",
+              "objects": {}
+            }
+          },
+          "d4211cc78a2075ae67e8": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2be515973811a72e34bd",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "grupo_edad"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "grupo_edad"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "fb75a371a49cb2c0a737": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "1d6dab0606ec1c3028d3",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "generotexto"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "generotexto"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "2eb2c265161a9a06d1d9": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "adaeb21032261cce0954": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "92f7143c39b739b5c843",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "m",
+                        "Entity": "main salud_mental",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Not": {
+                            "Expression": {
+                              "Comparison": {
+                                "ComparisonKind": 0,
+                                "Left": {
+                                  "Column": {
+                                    "Expression": {
+                                      "SourceRef": {
+                                        "Source": "m"
+                                      }
+                                    },
+                                    "Property": "nivel_jerarquico"
+                                  }
+                                },
+                                "Right": {
+                                  "Literal": {
+                                    "Value": "null"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "nivel_jerarquico"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "472e43d311bdec1079b9",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "grupo_edad"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "6b6bc772a392132b55d8",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "main salud_mental"
+                            }
+                          },
+                          "Property": "escala_perjuicio"
+                        }
+                      },
+                      "Function": 1
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "lineChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "main salud_mental"
+                            }
+                          },
+                          "Property": "escala_perjuicio"
+                        }
+                      },
+                      "Function": 1
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "grupo_edad"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "d52b3ae0e788c2eb5ac4": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "80f9ff7316c474a4a1d9",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "m",
+                        "Entity": "main salud_mental",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Not": {
+                            "Expression": {
+                              "Comparison": {
+                                "ComparisonKind": 0,
+                                "Left": {
+                                  "Column": {
+                                    "Expression": {
+                                      "SourceRef": {
+                                        "Source": "m"
+                                      }
+                                    },
+                                    "Property": "nivel_jerarquico"
+                                  }
+                                },
+                                "Right": {
+                                  "Literal": {
+                                    "Value": "null"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "nivel_jerarquico"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "85b0b9884308a1a20e94",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "puestotexto"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "3d3ea9acc65aad1c12aa",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "main salud_mental"
+                            }
+                          },
+                          "Property": "participanteID"
+                        }
+                      },
+                      "Function": 5
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "7bcbd9d8d46a74aab479",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "main salud_mental"
+                            }
+                          },
+                          "Property": "escala_perjuicio"
+                        }
+                      },
+                      "Function": 1
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredColumnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "nivel_jerarquico"
+                    }
+                  }
+                },
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "puestotexto"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "nivel_jerarquico"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "e708f49687021301ad40": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "fc6a596f1ced53776c98": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "dfedc9d9a3b257150a40",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "edad"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "893c3600b63d61a0add5",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "grupo_edad"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "eb4437d88a05c08b5d22",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "main salud_mental"
+                            }
+                          },
+                          "Property": "escala_perjuicio"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "columnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "main salud_mental"
+                            }
+                          },
+                          "Property": "escala_perjuicio"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "main salud_mental"
+                        }
+                      },
+                      "Property": "edad"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "6a2a900a205c3503c518": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "a74997740e3575656a30": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          }
+        },
+        "visualContainerGroups": {
+          "17b9601f04d8373e4797": {
+            "isHidden": false
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
