@@ -138,6 +138,62 @@ with tab3:
     st.markdown("---")
 
     query_3 = """
+WITH tamano AS (
+    SELECT a."SurveyID", a."UserID", MAX(TRIM(a."AnswerText")) AS tramo
+    FROM answer a
+    JOIN question q ON q.questionid = a."QuestionID"
+    WHERE LOWER(q.questiontext) LIKE '%how many employees%'
+    AND TRIM(a."AnswerText") NOT IN ('-1', '')
+    GROUP BY a."SurveyID", a."UserID"
+),
+beneficios AS (
+    SELECT a."SurveyID", a."UserID",
+        MAX(CASE WHEN LOWER(TRIM(a."AnswerText")) = 'yes' THEN 1 ELSE 0 END) AS ofrece
+    FROM answer a
+    JOIN question q ON q.questionid = a."QuestionID"
+    WHERE LOWER(q.questiontext) LIKE '%your employer provide mental health benefits%'
+    AND TRIM(a."AnswerText") NOT IN ('-1', '')
+    GROUP BY a."SurveyID", a."UserID"
+),
+confianza AS (
+    SELECT a."SurveyID", a."UserID",
+        MAX(CASE WHEN LOWER(TRIM(a."AnswerText")) = 'yes' THEN 1 ELSE 0 END) AS comodo
+    FROM answer a
+    JOIN question q ON q.questionid = a."QuestionID"
+    WHERE LOWER(q.questiontext) LIKE '%direct supervisor%'
+    AND (LOWER(q.questiontext) LIKE '%comfortable%' OR LOWER(q.questiontext) LIKE '%willing%')
+    AND LOWER(q.questiontext) NOT LIKE '%have been%'
+    AND LOWER(q.questiontext) NOT LIKE '%previous%'
+    AND TRIM(a."AnswerText") NOT IN ('-1', '')
+    GROUP BY a."SurveyID", a."UserID"
+),
+poblacion AS (
+    SELECT t."SurveyID", t.tramo, b.ofrece, c.comodo,
+        CASE t.tramo WHEN '1-5' THEN 1 WHEN '6-25' THEN 2 WHEN '26-100' THEN 3
+                        WHEN '100-500' THEN 4 WHEN '500-1000' THEN 5
+                        WHEN 'More than 1000' THEN 6 ELSE 99 END AS orden
+    FROM tamano t
+    JOIN beneficios b ON b."SurveyID" = t."SurveyID" AND b."UserID" = t."UserID"
+    JOIN confianza c ON c."SurveyID" = t."SurveyID" AND c."UserID" = t."UserID"
+),
+tramos AS (
+    SELECT "SurveyID", tramo, orden,
+        COUNT(*) AS encuestados,
+           1.0 * SUM(ofrece) / COUNT(*) AS prop_beneficios,
+           1.0 * SUM(comodo) / COUNT(*) AS prop_comodos,
+           1.0 * SUM(ofrece) / COUNT(*) - 1.0 * SUM(comodo) / COUNT(*) AS brecha
+    FROM poblacion
+    GROUP BY "SurveyID", tramo, orden
+)
+SELECT "SurveyID" AS edicion, tramo AS tamano_empresa, encuestados,
+       ROUND(100 * prop_beneficios, 1) AS pct_ofrece_beneficios,
+       ROUND(100 * prop_comodos, 1) AS pct_comodo_con_supervisor,
+       ROUND(100 * brecha, 1) AS brecha_pp, 
+       RANK() OVER (PARTITION BY "SurveyID" ORDER BY brecha DESC) AS puesto_brecha,
+       ROUND(100.0 * SUM(encuestados) OVER (PARTITION BY "SurveyID" ORDER BY orden)
+            / SUM(encuestados) OVER (PARTITION BY "SurveyID"), 1) AS pct_acumulado
+FROM tramos
+ORDER BY "SurveyID", orden
 """
     
     sql_input_3 = st.text_area("Escribe tu tercera consulta:", value=query_3, height=250, key="sql_3")
