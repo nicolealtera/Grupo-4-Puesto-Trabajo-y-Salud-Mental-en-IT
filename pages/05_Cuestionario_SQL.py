@@ -110,7 +110,75 @@ with tab2:
     st.markdown("---")
 
     query_2 = """
-SELECT * FROM answer LIMIT 5;
+WITH puesto_trabajo_jerarquia AS (
+    SELECT "SurveyID" AS edicion, "UserID" AS usuario,
+           CASE TRIM("AnswerText")
+               WHEN 'Executive Leadership'    THEN 3
+               WHEN 'Supervisor/Team Lead'    THEN 2
+               WHEN 'Back-end Developer'      THEN 1
+               WHEN 'Front-end Developer'     THEN 1
+               WHEN 'DevOps/SysAdmin'         THEN 1
+               WHEN 'Designer'                THEN 1
+               WHEN 'Support'                 THEN 1
+               WHEN 'Dev Evangelist/Advocate' THEN 1
+               WHEN 'One-person shop'         THEN 1
+               WHEN 'Other'                   THEN 0
+               WHEN 'Sales'                   THEN 0
+               WHEN 'HR'                      THEN 0
+           END AS jerarquia
+    FROM answer
+    WHERE "QuestionID" = 117
+),
+jerarquia_maxima AS (
+    SELECT edicion, usuario,
+           CASE MAX(jerarquia)
+               WHEN 3 THEN 'Directivo'
+               WHEN 2 THEN 'Coordinación'
+               WHEN 1 THEN 'Operativo'
+           END AS nivel
+    FROM puesto_trabajo_jerarquia
+    GROUP BY edicion, usuario
+    HAVING MAX(jerarquia) > 0
+),
+edad AS (
+    SELECT usuario, edad
+    FROM (
+        SELECT "UserID" AS usuario,
+               CASE WHEN TRIM("AnswerText") ~ '^[0-9]+$'
+                    THEN TRIM("AnswerText")::int END AS edad
+        FROM answer
+        WHERE "QuestionID" = 1
+    ) t
+    WHERE edad BETWEEN 15 AND 80
+),
+edades_segun_nivel AS (
+    SELECT j.edicion, j.nivel, e.edad,
+           ROW_NUMBER() OVER (PARTITION BY j.edicion, j.nivel ORDER BY e.edad) AS posicion_grupo,
+           COUNT(*)     OVER (PARTITION BY j.edicion, j.nivel)                 AS total_grupo,
+           ROW_NUMBER() OVER (ORDER BY e.edad)                                 AS posicion_general,
+           COUNT(*)     OVER ()                                                AS total_general
+    FROM jerarquia_maxima j
+    JOIN edad e ON e.usuario = j.usuario
+),
+mediana_grupo AS (
+    SELECT edicion, nivel, AVG(edad) AS mediana
+    FROM edades_segun_nivel
+    WHERE posicion_grupo IN ((total_grupo + 1) / 2, (total_grupo + 2) / 2)
+    GROUP BY edicion, nivel
+),
+mediana_general AS (
+    SELECT AVG(edad) AS mediana
+    FROM edades_segun_nivel
+    WHERE posicion_general IN ((total_general + 1) / 2, (total_general + 2) / 2)
+)
+SELECT g.edicion, g.nivel,
+       (SELECT COUNT(*) FROM jerarquia_maxima j
+        WHERE j.edicion = g.edicion AND j.nivel = g.nivel) AS cantidad_encuestados,
+       ROUND(g.mediana, 1) AS mediana_grupo,
+       ROUND((SELECT mediana FROM mediana_general), 1) AS mediana_general,
+       ROUND(g.mediana - (SELECT mediana FROM mediana_general), 1) AS diferencia_medianas
+FROM mediana_grupo g
+ORDER BY g.edicion, g.nivel
 """
     
     sql_input_2 = st.text_area("Escribe tu segunda consulta:", value=query_2, height=250, key="sql_2")
