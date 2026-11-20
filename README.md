@@ -2,6 +2,8 @@
 
 ![Puesto de Trabajo y su Relación con la Salud Mental en el Ámbito Tecnológico: Un Análisis Estadístico del Impacto en el Desarrollo Profesional](assets/banner.png)
 
+### Links: [Dashboard](https://salud-mental-it.streamlit.app/) y [PowerBI](https://app.powerbi.com/view?r=eyJrIjoiODZjN2ExYzctMDg4Mi00ZWEzLThmZmUtNmRkYWI4ODVkNjI0IiwidCI6IjRjODE4Zjc5LWFiODQtNDU1Mi05YjdjLTJmZTcxNWIwZDBkNSIsImMiOjR9&pageName=9aa73316d8030f5acd6c)
+
 ## Descripción del Proyecto
 
 Este proyecto analiza cómo difieren las percepciones de perjuicio profesional por motivos de salud mental según el nivel jerárquico del puesto de trabajo y el grupo de edad en trabajadores del sector tecnológico, utilizando datos de la encuesta OSMI Mental Health in Tech Survey. El estudio emplea un ANOVA factorial de dos vías con interacción como técnica inferencial principal, complementado con análisis descriptivo y visualización de datos para explorar las diferencias entre los grupos e identificar los segmentos más vulnerables.
@@ -64,7 +66,7 @@ El sistema original utilizaba un esquema EAV (Entidad-Atributo-Valor) que, aunqu
 
 A partir de estas bases, la información útil se organizó en entidades categóricas dependientes que agrupan los datos por dominios temáticos —como situación laboral, estado mental, impacto profesional, apoyo corporativo y prejuicios— vinculados de forma uno a uno con los participantes y uno a muchos con las encuestas. Asimismo, se separaron las dependencias transitivas en catálogos independientes de referencia para los puestos, géneros, países y estados, logrando una estructura consistente, sin duplicidades y altamente optimizada para consultas analíticas.
 
-![Visualización](assets/der_normalizacion.png)
+![Visualización](./assets/DER_normalizacion.png)
 
 ---
 
@@ -106,19 +108,48 @@ streamlit run app.py
 
 ```text
 
-├── app.py                    # Código principal de la App de Streamlit
-├── requirements.txt          # Librerias de Python
-├── README.md.                # Documentación del repositorio
+├── app.py                                  # Código principal de la App de Streamlit
+├── requirements.txt                        # Librerías de Python
+├── README.md                               # Documentación del repositorio
+├── .env.ejemplo                            # Plantilla de variables de entorno
+├── .gitignore                              # Archivos excluidos del repositorio
+├── evaluacion_sql_salud_mental_tec...      # Evaluación SQL del proyecto
 ├── .streamlit
-│   └──config.toml            # Tema visual de la app
-│ 
+│   └── config.toml                         # Tema visual de la app
 ├── pages/
-│   ├── 01_Inicio.py                # Página de inicio
-│   ├── 02_Marco_Metodologico.py    # Operacionalización y metodología
-│   ├── 03_Marco_Teorico.py         # Fundamentos conceptuales
-│   ├── 05_Conclusiones.py          # Hallazgos y recomendaciones
-│   └── 06_Bibliografia.py          # Referencias bibliográficas
-│
+│   ├── 00_Inicio.py                        # Página de inicio
+│   ├── 01_Planteamiento.py                 # Problema, objetivos y justificación
+│   ├── 02_Marco_Teorico.py                 # Fundamentos conceptuales
+│   ├── 03_Marco_Metodologico.py            # Operacionalización y metodología
+│   ├── 04_Resultados.py                    # Resultados del estudio
+│   ├── 05_Cuestionario_SQL.py              # Cuestionario de consultas SQL
+│   └── 06_Conclusiones.py                  # Hallazgos y recomendaciones
+├── base datos/
+│   ├── mental_health.sqlite                # Base de datos SQLite del proyecto
+│   ├── modelado_de_datos.sql               # Desnormalización: modelo estrella
+│   ├── normalización/
+│   │   └── Script.sql                      # Tablas normalizadas (3FN) y carga desde Answer
+│   └── limpieza/
+│       ├── limpieza.py                     # Limpieza y transformación en Python
+│       └── limpieza.sql                    # Limpieza y estandarización en SQL
+├── Dashboard PowerBI/
+│   ├── salud_mental_en_el_trabajo.pbip     # Proyecto de Power BI
+│   ├── salud_mental_en_el_trabajo.Report/  # Reporte (páginas y visuales)
+│   │   ├── definition.pbir
+│   │   └── definition/                     # report.json, pages.json y página del dashboard
+│   └── salud_mental_en_el_trabajo.SemanticModel/  # Modelo semántico
+│       ├── definition.pbism
+│       ├── diagramLayout.json              # Diagrama de relaciones del modelo
+│       └── definition/                     # Tablas, relaciones y medidas
+└── assets/                                 # Imágenes de la app
+    ├── banner.png                          # Encabezado de la app
+    ├── pelusa.gif / pelusa1.png            # Mascota
+    ├── Planteamiento.png, objetivos.png, justificacion.png      # Planteamiento
+    ├── marco teorico.png, metologico.png, der_normalizacion.png # Marcos y modelo de datos
+    ├── resultados.png, resultados del estudio.png               # Resultados
+    ├── Cuestionario.png                    # Cuestionario SQL
+    └── Conclusiones.png, Recomendaciones.png                    # Cierre
+
 ```
 
 ---
