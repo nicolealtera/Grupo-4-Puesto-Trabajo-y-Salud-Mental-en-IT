@@ -9,6 +9,15 @@
         "page": "2.3.1"
       },
       "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "ReportThemeDark38609466690667704.json",
+      "reportVersionAtImport": {
+        "visual": "2.14.0",
+        "report": "3.4.0",
+        "page": "2.3.1"
+      },
+      "type": "RegisteredResources"
     }
   },
   "objects": {
@@ -24,8 +33,24 @@
           }
         }
       }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
     ]
   },
+  "publicCustomVisuals": [
+    "htmlContent443BE3AD55E043BF878BED274D3A6865"
+  ],
   "resourcePackages": [
     {
       "name": "SharedResources",
@@ -37,6 +62,37 @@
           "type": "BaseTheme"
         }
       ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "icons8-arrow-3003738701538694866.png",
+          "path": "icons8-arrow-3003738701538694866.png",
+          "type": "Image"
+        },
+        {
+          "name": "icons8-menu-505042922398641465.png",
+          "path": "icons8-menu-505042922398641465.png",
+          "type": "Image"
+        },
+        {
+          "name": "ReportThemeDark38609466690667704.json",
+          "path": "ReportThemeDark38609466690667704.json",
+          "type": "CustomTheme"
+        },
+        {
+          "name": "Sidebar_(2)3245344587965089.png",
+          "path": "Sidebar_(2)3245344587965089.png",
+          "type": "Image"
+        },
+        {
+          "name": "Untitled_(4)6008529514119182.png",
+          "path": "Untitled_(4)6008529514119182.png",
+          "type": "Image"
+        }
+      ]
     }
   ],
   "settings": {
@@ -45,6 +101,7 @@
     "defaultDrillFilterOtherVisuals": true,
     "allowChangeFilterTypes": true,
     "useEnhancedTooltips": true,
+    "filterPaneHiddenInEditMode": true,
     "useDefaultAggregateDisplayName": true,
     "customMemoryLimit": "1048576",
     "customTimeoutLimit": "225"

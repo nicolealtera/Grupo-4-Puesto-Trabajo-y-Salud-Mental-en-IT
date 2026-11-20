@@ -1,0 +1,70 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "3ee9c3987ab1500ce059",
+  "position": {
+    "x": 129.12899669239249,
+    "y": 0,
+    "z": 500,
+    "height": 162.99889746416758,
+    "width": 1253.1863285556781,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Perfill Sociodemográfico",
+                    "textStyle": {
+                      "fontSize": "40pt",
+                      "color": "#f8f4eb"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Vistazo al perfil de los trabajadores encuestado de empresas tecnologicas",
+                    "textStyle": {
+                      "fontSize": "20pt",
+                      "color": "#9bb2cb"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "100D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

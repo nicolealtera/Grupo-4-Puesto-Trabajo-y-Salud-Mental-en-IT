@@ -1,0 +1,258 @@
+table 'main salud_mental'
+	lineageTag: 31689e09-8e9e-4793-901f-99d149e1b1af
+
+	column paistexto
+		dataType: string
+		lineageTag: fd0ab6aa-c549-4446-b1d9-e102effcd014
+		summarizeBy: none
+		sourceColumn: paistexto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Estadotexto
+		dataType: string
+		lineageTag: 202528b1-0cfb-401e-b254-dafa4eae3f0f
+		summarizeBy: none
+		sourceColumn: Estadotexto
+
+		annotation SummarizationSetBy = Automatic
+
+	column puestotexto
+		dataType: string
+		lineageTag: a8cd78a9-05c4-4d11-9379-d5c63b196215
+		summarizeBy: none
+		sourceColumn: puestotexto
+
+		annotation SummarizationSetBy = Automatic
+
+	column nivel_jerarquico
+		dataType: string
+		lineageTag: db64fe50-e821-4bff-bab9-e52f6db780e6
+		summarizeBy: none
+		sourceColumn: nivel_jerarquico
+
+		annotation SummarizationSetBy = Automatic
+
+	column independiente_trabajo
+		dataType: int64
+		formatString: 0
+		lineageTag: 6cece3d5-b147-4dc4-93c3-5e6967e63e73
+		summarizeBy: sum
+		sourceColumn: independiente_trabajo
+
+		annotation SummarizationSetBy = Automatic
+
+	column trabajo_remoto
+		dataType: string
+		lineageTag: fdf3fa04-7751-4d05-ab8d-8c3950caf66f
+		summarizeBy: none
+		sourceColumn: trabajo_remoto
+
+		annotation SummarizationSetBy = Automatic
+
+	column edad
+		dataType: int64
+		formatString: 0
+		lineageTag: 0cf42a04-2cca-436b-9364-6358ea27e236
+		summarizeBy: sum
+		sourceColumn: edad
+
+		annotation SummarizationSetBy = Automatic
+
+	column generotexto
+		dataType: string
+		lineageTag: c1f81373-a2a5-415f-99ed-8556837d4325
+		summarizeBy: none
+		sourceColumn: generotexto
+
+		annotation SummarizationSetBy = Automatic
+
+	column condiciones_diagnosticadas
+		dataType: string
+		lineageTag: a6d5de2f-bf8c-40e7-8411-9ff5340c48c8
+		summarizeBy: none
+		sourceColumn: condiciones_diagnosticadas
+
+		annotation SummarizationSetBy = Automatic
+
+	column busco_tratamiento
+		dataType: int64
+		formatString: 0
+		lineageTag: 36331e13-475e-4cb7-90eb-3d73d5062368
+		summarizeBy: sum
+		sourceColumn: busco_tratamiento
+
+		annotation SummarizationSetBy = Automatic
+
+	column diagnostico_oficial
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 664c1697-f8a0-4de7-979e-e910f2794f74
+		summarizeBy: none
+		sourceColumn: diagnostico_oficial
+
+		annotation SummarizationSetBy = Automatic
+
+	column participanteID
+		dataType: int64
+		formatString: 0
+		lineageTag: 96ce646f-b499-4573-80f5-dada146856ab
+		summarizeBy: count
+		sourceColumn: participanteID
+
+		annotation SummarizationSetBy = Automatic
+
+	column encuestaID
+		dataType: int64
+		formatString: 0
+		lineageTag: 4f8697cd-bc90-4d7b-b6d9-2c4b9d02ba0a
+		summarizeBy: count
+		sourceColumn: encuestaID
+
+		annotation SummarizationSetBy = Automatic
+
+	column encuestatexto
+		dataType: string
+		lineageTag: 1a64aa1f-ad2f-4bd4-96fc-7db13c42eaaf
+		summarizeBy: none
+		sourceColumn: encuestatexto
+
+		annotation SummarizationSetBy = Automatic
+
+	column puesto_trabajoID
+		dataType: int64
+		formatString: 0
+		lineageTag: ec44e6ed-2128-4386-8f02-763f84b5c255
+		summarizeBy: count
+		sourceColumn: puesto_trabajoID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ubicacionID
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d55b596-0ebe-4877-86c6-91f002be8774
+		summarizeBy: count
+		sourceColumn: ubicacionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column afecta_carrera
+		dataType: string
+		lineageTag: 6112ad33-4081-4b53-8a2a-f3d741351227
+		summarizeBy: none
+		sourceColumn: afecta_carrera
+
+		annotation SummarizationSetBy = Automatic
+
+	column interfiere_trabajo
+		dataType: string
+		lineageTag: 7f9d45f3-5958-481a-a3e7-1567669093a5
+		summarizeBy: none
+		sourceColumn: interfiere_trabajo
+
+		annotation SummarizationSetBy = Automatic
+
+	column crees_te_verian_mal
+		dataType: string
+		lineageTag: 94f5b0c5-368e-4a7f-932c-6ba56f5176bf
+		summarizeBy: none
+		sourceColumn: crees_te_verian_mal
+
+		annotation SummarizationSetBy = Automatic
+
+	column comentarios_malos
+		dataType: string
+		lineageTag: e3a631b0-9d1f-40d1-a18e-7ff72eb696e6
+		summarizeBy: none
+		sourceColumn: comentarios_malos
+
+		annotation SummarizationSetBy = Automatic
+
+	column consecuencias_negativas
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 4212d688-eb5f-41cc-a9ee-5e1d012c38b7
+		summarizeBy: none
+		sourceColumn: consecuencias_negativas
+
+		annotation SummarizationSetBy = Automatic
+
+	column recursos_empresa_ayuda_mental
+		dataType: string
+		lineageTag: 4c223561-3414-47af-87a4-9e73149f1a9b
+		summarizeBy: none
+		sourceColumn: recursos_empresa_ayuda_mental
+
+		annotation SummarizationSetBy = Automatic
+
+	column conoces_opciones_ayuda
+		dataType: string
+		lineageTag: 26ff2e47-1fbf-4f23-9588-09c5df7ab2d5
+		summarizeBy: none
+		sourceColumn: conoces_opciones_ayuda
+
+		annotation SummarizationSetBy = Automatic
+
+	column beneficios_salud_mental
+		dataType: string
+		lineageTag: d50cdb10-46ea-4659-bc24-bde01176aa36
+		summarizeBy: none
+		sourceColumn: beneficios_salud_mental
+
+		annotation SummarizationSetBy = Automatic
+
+	column anonimato_protegido
+		dataType: string
+		lineageTag: 3c2ba3c7-7032-45c2-9925-03f4d3dc2e5d
+		summarizeBy: none
+		sourceColumn: anonimato_protegido
+
+		annotation SummarizationSetBy = Automatic
+
+	column discucion_formal_salud_mental
+		dataType: string
+		lineageTag: 934891f0-0d43-40a0-ba26-6699efa454fd
+		summarizeBy: none
+		sourceColumn: discucion_formal_salud_mental
+
+		annotation SummarizationSetBy = Automatic
+
+	column escala_perjuicio
+		dataType: double
+		lineageTag: 59b9f6d1-e9f3-457d-9524-7dc584865785
+		summarizeBy: sum
+		sourceColumn: escala_perjuicio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column grupo_edad
+		dataType: string
+		lineageTag: a7edd140-bf4e-4b3e-a9c6-e1bafe70fc1f
+		summarizeBy: none
+		sourceColumn: grupo_edad
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'paistexto Jerarquía'
+		lineageTag: 1f2c454e-e3ad-4e47-bbd2-7e818e6ceb14
+
+		level paistexto
+			lineageTag: 95ecca5d-6aef-4020-ac60-9c7bd427d630
+			column: paistexto
+
+		level Estadotexto
+			lineageTag: 6fe0e199-ed45-47b9-a931-768de117dc0f
+			column: Estadotexto
+
+	partition 'main salud_mental' = m
+		mode: import
+		source =
+				let
+				    Origen = PostgreSQL.Database("pg.us-west-2-aws.motherduck.com", "puesto_trabajo_y_salud_mental"),
+				    main_salud_mental = Origen{[Schema="main",Item="salud_mental"]}[Data]
+				in
+				    main_salud_mental
+

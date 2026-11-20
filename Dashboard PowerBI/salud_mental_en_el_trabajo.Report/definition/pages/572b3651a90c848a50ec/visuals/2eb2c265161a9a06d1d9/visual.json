@@ -1,0 +1,70 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "2eb2c265161a9a06d1d9",
+  "position": {
+    "x": 143.94707828004411,
+    "y": 0,
+    "z": 1500,
+    "height": 182.05071664829106,
+    "width": 1088.0705622932744,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Análisis por Grupos",
+                    "textStyle": {
+                      "fontSize": "44pt",
+                      "color": "#fcfbf7"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Comparación acerca de la jerarquía y el grupo de edad",
+                    "textStyle": {
+                      "fontSize": "24pt",
+                      "color": "#9bb2cb"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "100D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
