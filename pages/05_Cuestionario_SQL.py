@@ -35,7 +35,52 @@ with tab1:
     st.markdown("---")
 
     query_1 = """
-SELECT * FROM answer LIMIT 5
+WITH resp AS (
+    SELECT "AnswerText" AS answertext, "SurveyID" AS surveyid, "UserID" AS userid, "QuestionID" AS questionid
+    FROM answer
+),
+base AS (
+    SELECT q.questionid, q.questiontext, a.surveyid,
+           CASE WHEN TRIM(a.answertext) IN ('', '-1') THEN NULL
+                ELSE TRIM(a.answertext) END AS resp_limpia
+    FROM resp a
+    JOIN question q ON q.questionid = a.questionid
+    WHERE a.questionid IN (10, 11, 14, 15, 16, 31, 49, 105, 113, 114)
+      AND a.answertext IS NOT NULL
+),
+por_anio AS (
+    SELECT questionid, questiontext, surveyid,
+           COUNT(1) AS total_registros,
+           COUNT(resp_limpia) AS respuestas_validas,
+           COUNT(1) - COUNT(resp_limpia) AS respuestas_nulas
+    FROM base
+    GROUP BY questionid, questiontext, surveyid
+),
+multi AS (
+    SELECT questionid
+    FROM por_anio
+    GROUP BY questionid
+    HAVING COUNT(DISTINCT surveyid) > 1
+),
+tasas AS (
+    SELECT p.questionid, p.questiontext, p.surveyid, p.respuestas_validas,
+           1.0 * p.respuestas_nulas / p.total_registros AS prop_nulos,
+           1.0 * p.respuestas_validas / p.total_registros AS tasa_valida
+    FROM por_anio p
+    JOIN multi m ON m.questionid = p.questionid
+),
+calculos AS (
+    SELECT questiontext, surveyid, respuestas_validas, prop_nulos,
+           tasa_valida - LAG(tasa_valida) OVER (PARTITION BY questionid ORDER BY surveyid) AS variacion_tasa_anterior,
+           RANK() OVER (PARTITION BY surveyid ORDER BY tasa_valida DESC) AS ranking_cobertura
+    FROM tasas
+)
+SELECT questiontext AS pregunta, surveyid AS encuesta, respuestas_validas,
+       ROUND(prop_nulos, 3) AS proporcion_nulos,
+       ROUND(variacion_tasa_anterior, 3) AS variacion_tasa_anterior,
+       ranking_cobertura
+FROM calculos
+ORDER BY questiontext, surveyid
 """
     
     sql_input_1 = st.text_area("Escribe tu primera consulta:", value=query_1, height=250, key="sql_1")
@@ -93,7 +138,6 @@ with tab3:
     st.markdown("---")
 
     query_3 = """
-SELECT * FROM answer LIMIT 5;
 """
     
     sql_input_3 = st.text_area("Escribe tu tercera consulta:", value=query_3, height=250, key="sql_3")
